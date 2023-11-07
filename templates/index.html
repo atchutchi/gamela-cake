@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Gamela Cake{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <h1>Welcome to Gamela Cake</h1>
+        <p>Delicious cakes and pastries for every occasion.</p>
+        <a href="{% url 'reserve' %}" class="btn btn-primary">Make a Reservation</a>
+    </div>
+</section>
+
+<!-- Featured Cakes Section -->
+<section class="featured-cakes">
+    <div class="container">
+        <h2>Featured Cakes</h2>
+        <div class="row">
+            <!-- Dynamically load featured cakes here -->
+            {% for cake in featured_cakes %}
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="{{ cake.image.url }}" class="card-img-top" alt="{{ cake.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ cake.name }}</h5>
+                        <p class="card-text">{{ cake.description }}</p>
+                        <a href="#" class="btn btn-primary">Order Now</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="about">
+    <div class="container">
+        <h2>About Us</h2>
+        <p>We are a family-owned bakery that has been serving the community with fresh cakes and pastries made with love and the finest ingredients since 1999.</p>
+    </div>
+</section>
+{% endblock %}
+
+{% block extrahead %}
+<!-- Additional CSS for the home page -->
+<link href="{% static 'css/home.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block extrajs %}
+<!-- Additional JavaScript for the home page -->
+<script src="{% static 'js/home.js' %}"></script>
+{% endblock %}

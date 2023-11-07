@@ -1,6 +1,7 @@
 from django.views.generic import TemplateView, ListView
 from django.contrib.auth.models import User
 from .models import Reservation, Cake
+from . import views
 
 class HomeView(TemplateView):
     template_name = 'index.html'
@@ -18,7 +19,7 @@ class ReservationListView(ListView):
     def get_queryset(self):
         
         return Reservation.objects.all()  
-        
+
 class CakeListView(ListView):
     model = Cake
     context_object_name = 'cakes'
