@@ -1,5 +1,6 @@
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.models import User
+from django.urls import reverse_lazy
 from .models import Reservation, Cake
 from . import views
 
@@ -14,7 +15,7 @@ class UserListView(ListView):
 class ReservationListView(ListView):  
     model = Reservation  
     context_object_name = 'reservations'
-    template_name = 'reservation.html'
+    template_name = 'reservations.html'
 
     def get_queryset(self):
         
@@ -24,3 +25,32 @@ class CakeListView(ListView):
     model = Cake
     context_object_name = 'cakes'
     template_name = 'cake.html'
+
+class ReservationCreateView(CreateView):
+    model = Reservation
+    fields = ['name', 'date', 'time', 'guests']
+    template_name = 'reservation_form.html'
+    success_url = '/reservations/'
+
+class ReservationEditView(UpdateView):
+    model = Reservation
+    fields = ['name', 'date', 'time', 'guests']
+    template_name = 'reservation_edit.html'
+    success_url = '/reservations/'
+
+class ReservationCreateView(CreateView):
+    model = Reservation
+    fields = ['name', 'date', 'time', 'guests']
+    template_name = 'reservation_form.html'
+    success_url = reverse_lazy('reservations')
+
+class ReservationEditView(UpdateView):
+    model = Reservation
+    fields = ['name', 'date', 'time', 'guests']
+    template_name = 'reservation_edit.html'
+    success_url = reverse_lazy('reservations')
+
+class ReservationDeleteView(DeleteView):
+    model = Reservation
+    template_name = 'reservation_confirm_delete.html'
+    success_url = reverse_lazy('reservations')

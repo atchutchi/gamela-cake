@@ -1,6 +1,6 @@
 <!-- templates/base.html -->
 <!DOCTYPE html>
-{% load static %}  
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -25,10 +25,13 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'menu' %}">Menu</a>
+                            <a class="nav-link" href="{% url 'cake' %}">Cakes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'reserve' %}">Reserve</a>
+                            <a class="nav-link" href="{% url 'reservation' %}">Reservations</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'user' %}">Users</a>
                         </li>
                         <!-- Add more navigation items here -->
                     </ul>

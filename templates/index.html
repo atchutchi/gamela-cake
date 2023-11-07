@@ -8,7 +8,7 @@
     <div class="container">
         <h1>Welcome to Gamela Cake</h1>
         <p>Delicious cakes and pastries for every occasion.</p>
-        <a href="{% url 'reserve' %}" class="btn btn-primary">Make a Reservation</a>
+        <a href="{% url 'reservation' %}" class="btn btn-primary">Make a Reservation</a>
     </div>
 </section>
 
@@ -18,7 +18,7 @@
         <h2>Featured Cakes</h2>
         <div class="row">
             <!-- Dynamically load featured cakes here -->
-            {% for cake in featured_cakes %}
+            {% for cake in cakes %}
             <div class="col-md-4">
                 <div class="card">
                     <img src="{{ cake.image.url }}" class="card-img-top" alt="{{ cake.name }}">
@@ -41,14 +41,4 @@
         <p>We are a family-owned bakery that has been serving the community with fresh cakes and pastries made with love and the finest ingredients since 1999.</p>
     </div>
 </section>
-{% endblock %}
-
-{% block extrahead %}
-<!-- Additional CSS for the home page -->
-<link href="{% static 'css/home.css' %}" rel="stylesheet">
-{% endblock %}
-
-{% block extrajs %}
-<!-- Additional JavaScript for the home page -->
-<script src="{% static 'js/home.js' %}"></script>
 {% endblock %}

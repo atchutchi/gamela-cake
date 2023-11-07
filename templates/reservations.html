@@ -1,14 +1,35 @@
-{% extends "base.html" %}
+<!-- Botão para adicionar nova reserva -->
+<a href="{% url 'reservation_create' %}" class="btn btn-success mb-3">Add New Reservation</a>
 
-{% block content %}
-<div class="container mt-4">
-    <h2>Reserva</h2>
-    <!-- Aqui você pode adicionar o formulário de reserva e lógica de exibição -->
-    <!-- Exemplo de formulário de reserva -->
-    <form action="{% url 'reservation_create' %}" method="post">
-        {% csrf_token %}
-        <!-- Campos do formulário -->
-        <button type="submit" class="btn btn-primary">Confirmar Reserva</button>
-    </form>
-</div>
-{% endblock %}
+<!-- Tabela de reservas -->
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Date</th>
+            <th scope="col">Time</th>
+            <th scope="col">Guests</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for reservation in reservations %}
+        <tr>
+            <th scope="row">{{ reservation.id }}</th>
+            <td>{{ reservation.name }}</td>
+            <td>{{ reservation.date }}</td>
+            <td>{{ reservation.time }}</td>
+            <td>{{ reservation.guests }}</td>
+            <td>
+                <a href="{% url 'reservation_edit' reservation.id %}" class="btn btn-primary btn-sm">Edit</a>
+                <a href="{% url 'reservation_delete' reservation.id %}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6" class="text-center">No reservations found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
