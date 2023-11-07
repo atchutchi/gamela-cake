@@ -1,12 +1,11 @@
-# booking/urls.py
+# gamelacake/urls.py
 from django.urls import path
-from .views.reservation_views import ReservationListView
-from .views.user_views import UserListView
-from .views.cake_views import CakeListView
+from booking.views import HomeView, UserListView, ReservationListView, CakeListView
 
 urlpatterns = [
-    path('reservations/', ReservationListView.as_view(), name='reservation_list'),
+    path('', HomeView.as_view(), name='home'),
     path('users/', UserListView.as_view(), name='user_list'),
+    path('reservations/', ReservationListView.as_view(), name='reservation_list'),
     path('cakes/', CakeListView.as_view(), name='cake_list'),
-    # Adicione mais padrões de URL conforme necessário
+    # ... outras URLs
 ]

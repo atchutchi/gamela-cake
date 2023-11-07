@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Reserva</h2>
+    <!-- Aqui você pode adicionar o formulário de reserva e lógica de exibição -->
+    <!-- Exemplo de formulário de reserva -->
+    <form action="{% url 'reservation_create' %}" method="post">
+        {% csrf_token %}
+        <!-- Campos do formulário -->
+        <button type="submit" class="btn btn-primary">Confirmar Reserva</button>
+    </form>
+</div>
+{% endblock %}
