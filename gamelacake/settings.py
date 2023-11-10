@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-atchutchi-gamelacake-8jbxmfmnqei.ws-eu105.gitpod.io', 'gamela-cake-5a01bc199f23.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['8000-atchutchi-gamelacake-8jbxmfmnqei.ws-eu106.gitpod.io', 'gamela-cake-5a01bc199f23.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -142,3 +142,6 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = 'home'  # Redirect to home after login
+LOGOUT_REDIRECT_URL = 'home'  # Redirect to home after logout

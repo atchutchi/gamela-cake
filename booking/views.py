@@ -1,11 +1,18 @@
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from django.views import generic
 from django.urls import reverse_lazy
 from .models import Reservation, Cake
 from . import views
 
 class HomeView(TemplateView):
     template_name = 'index.html'
+
+class SignUpView(generic.CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'registration/signup.html'
 
 class UserListView(ListView):
     model = User

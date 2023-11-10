@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Our Cakes</h2>
+  <div class="cakes-list">
+    {% for cake in cakes %}
+      <div class="cake">
+        <h3>{{ cake.name }}</h3>
+        <img src="{{ cake.image.url }}" alt="{{ cake.name }}">
+        <p>{{ cake.description }}</p>
+        <p>Price: {{ cake.price }}</p>
+        <!-- Aqui você pode adicionar links para editar ou deletar um bolo, se necessário -->
+      </div>
+    {% empty %}
+      <p>No cakes available at the moment.</p>
+    {% endfor %}
+  </div>
+{% endblock %}
