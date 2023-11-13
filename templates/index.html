@@ -3,14 +3,16 @@
 {% block title %}Home - Gamela Cake{% endblock %}
 
 {% block content %}
-<!-- Hero Section -->
-<section class="hero">
-    <div class="container">
-        <h1>Welcome to Gamela Cake</h1>
-        <p>Delicious cakes and pastries for every occasion.</p>
-        <a href="{% url 'reservation' %}" class="btn btn-primary">Make a Reservation</a>
+<!-- landing page Section -->
+<section class="landing_page-section text-center">
+    <div class="container py-5 my-5">
+        <h1 class="mb-3">Welcome to Cake Booking</h1>
+        <p class="mb-4">Order delicious cakes for any occasion</p>
+        <a href="{% url 'reservation' %}" class="btn btn-dark btn-lg mr-2">Make Reservation</a>
+        <a href="{% url 'cake' %}" class="btn btn-outline-dark btn-lg">View Cakes</a>
     </div>
 </section>
+
 
 <!-- Featured Cakes Section -->
 <section class="featured-cakes">
