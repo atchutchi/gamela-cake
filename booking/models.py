@@ -1,4 +1,6 @@
 from django.db import models
+from datetime import datetime
+from django.utils import timezone
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
@@ -30,15 +32,14 @@ class Cake(models.Model):
 # Reservation model to store booking details
 class Reservation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    date = models.DateField()
-    time = models.TimeField()
+    datetime = models.DateTimeField(default=timezone.now)
     party_size = models.IntegerField()
     special_request = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     # String representation of the Reservation model
     def __str__(self):
-        return f"Reservation for {self.user.username} on {self.date} at {self.time}"
+        return f"Reservation for {self.user.username} on {self.datetime}"
 
 # Order model to store order details associated with a reservation
 class Order(models.Model):

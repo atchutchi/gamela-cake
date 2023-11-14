@@ -10,8 +10,8 @@ class CakeAdmin(admin.ModelAdmin):
 # Admin configuration for the Reservation model
 @admin.register(Reservation)
 class ReservationAdmin(admin.ModelAdmin):
-    list_display = ['user', 'date', 'time']  # Define which fields are shown in the list view
-    list_filter = ['date', 'time']  # Provide filter options in the sidebar for 'status' and 'date_time'
+    list_display = ['user', 'datetime']  # Define which fields are shown in the list view
+    list_filter = ['datetime',]  # Provide filter options in the sidebar for 'status' and 'date_time'
 
 # Admin configuration for the Order model
 @admin.register(Order)

@@ -7,8 +7,7 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Name</th>
-            <th scope="col">Date</th>
-            <th scope="col">Time</th>
+            <th scope="col">DateTime</th>
             <th scope="col">Guests</th>
             <th scope="col">Actions</th>
         </tr>
@@ -18,8 +17,7 @@
         <tr>
             <th scope="row">{{ reservation.id }}</th>
             <td>{{ reservation.name }}</td>
-            <td>{{ reservation.date }}</td>
-            <td>{{ reservation.time }}</td>
+            <td>{{ reservation.datetime }}</td>
             <td>{{ reservation.guests }}</td>
             <td>
                 <a href="{% url 'reservation_edit' reservation.id %}" class="btn btn-primary btn-sm">Edit</a>

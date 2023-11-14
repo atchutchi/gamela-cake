@@ -35,25 +35,13 @@ class CakeListView(ListView):
 
 class ReservationCreateView(CreateView):
     model = Reservation
-    fields = ['name', 'date', 'time', 'guests']
-    template_name = 'reservation_form.html'
-    success_url = '/reservations/'
-
-class ReservationEditView(UpdateView):
-    model = Reservation
-    fields = ['name', 'date', 'time', 'guests']
-    template_name = 'reservation_edit.html'
-    success_url = '/reservations/'
-
-class ReservationCreateView(CreateView):
-    model = Reservation
-    fields = ['name', 'date', 'time', 'guests']
+    fields = ['datetime', 'party_size', 'special_request']
     template_name = 'reservation_form.html'
     success_url = reverse_lazy('reservations')
 
 class ReservationEditView(UpdateView):
     model = Reservation
-    fields = ['name', 'date', 'time', 'guests']
+    fields = ['datetime', 'party_size', 'special_request']
     template_name = 'reservation_edit.html'
     success_url = reverse_lazy('reservations')
 

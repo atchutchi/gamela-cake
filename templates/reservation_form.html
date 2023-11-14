@@ -1,5 +1,8 @@
-<!-- reservation_form.html -->
 {% extends 'base.html' %}
+
+{% block extrahead %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+{% endblock %}
 
 {% block content %}
   <h2>Create Reservation</h2>
@@ -8,4 +11,14 @@
     {{ form.as_p }}
     <button type="submit">Save</button>
   </form>
+{% endblock %}
+
+{% block extrajs %}
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    flatpickr("#id_datetime", {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+    });
+</script>
 {% endblock %}
