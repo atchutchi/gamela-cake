@@ -33,9 +33,34 @@ class Cake(models.Model):
 class Reservation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     datetime = models.DateTimeField(default=timezone.now)
-    party_size = models.IntegerField()
-    special_request = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    SIZE_CHOICES = [
+        ('S', 'Small - 1 layer x 24cm'),
+        ('M', 'Medium - 2 layers x 20cm'),
+        ('L', 'Large - 3 layers x 20cm'),
+        ('XL', 'Extra Large - 3 layers x 24cm'),
+    ]
+
+    BATTER_CHOICES = [
+        ('N', 'Nuts'),
+        ('V', 'Vanilla'),
+        ('B', 'Buttery'),
+        ('R', 'Red Velvet'),
+    ]
+
+    FILLING_CHOICES = [
+        ('BR', 'Brigadier'),
+        ('BW', 'Brigadeiro with walnuts'),
+        ('FM', '4 Milk'),
+        ('RF', 'Red fruits'),
+        ('CC', 'Coconut'),
+        ('MC', 'Milk cream'),
+    ]
+
+    size = models.CharField(max_length=2, choices=SIZE_CHOICES, default='S')
+    batter = models.CharField(max_length=1, choices=BATTER_CHOICES, default='N')
+    filling = models.CharField(max_length=2, choices=FILLING_CHOICES, default='BR')
+    special_request = models.TextField(blank=True, null=True)
 
     # String representation of the Reservation model
     def __str__(self):

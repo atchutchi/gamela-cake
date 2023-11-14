@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views import generic
 from django.urls import reverse_lazy
 from .models import Reservation, Cake
+from .forms import ReservationForm
 from . import views
 
 class HomeView(TemplateView):
@@ -33,15 +34,21 @@ class CakeListView(ListView):
     context_object_name = 'cakes'
     template_name = 'cake.html'
 
+from .forms import ReservationForm
+
 class ReservationCreateView(CreateView):
     model = Reservation
-    fields = ['datetime', 'party_size', 'special_request']
+    form_class = ReservationForm
     template_name = 'reservation_form.html'
     success_url = reverse_lazy('reservations')
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 class ReservationEditView(UpdateView):
     model = Reservation
-    fields = ['datetime', 'party_size', 'special_request']
+    form_class = ReservationForm
     template_name = 'reservation_edit.html'
     success_url = reverse_lazy('reservations')
 
