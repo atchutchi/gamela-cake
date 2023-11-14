@@ -1,18 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Our Cakes</h2>
-  <div class="cakes-list">
-    {% for cake in cakes %}
-      <div class="cake">
-        <h3>{{ cake.name }}</h3>
-        <img src="{{ cake.image.url }}" alt="{{ cake.name }}">
-        <p>{{ cake.description }}</p>
-        <p>Price: {{ cake.price }}</p>
-        <!-- Aqui você pode adicionar links para editar ou deletar um bolo, se necessário -->
-      </div>
-    {% empty %}
-      <p>No cakes available at the moment.</p>
-    {% endfor %}
+  <div class="container mt-4">
+    <h2>Our Cakes</h2>
+    <div class="row">
+      {% for cake in cakes %}
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <img src="{{ cake.image.url }}" class="card-img-top" alt="{{ cake.name }}">
+            <div class="card-body">
+              <h5 class="card-title">{{ cake.name }}</h5>
+              <p class="card-text">{{ cake.description }}</p>
+              <p class="card-text">Price: ${{ cake.price }}</p>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <p>No cakes available.</p>
+      {% endfor %}
+    </div>
   </div>
 {% endblock %}
