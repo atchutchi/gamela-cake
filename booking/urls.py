@@ -1,5 +1,6 @@
-# gamelacake/urls.py
+# urls.py
 from django.urls import path, include
+from . import views
 from django.contrib.auth.views import LoginView
 from .views import SignUpView
 from booking.views import (
@@ -10,6 +11,7 @@ from booking.views import (
     ReservationEditView,
     ReservationDeleteView,
     CakeListView,
+    get_available_slots,
 )
 
 urlpatterns = [
@@ -23,4 +25,5 @@ urlpatterns = [
     path('reservations/add/', ReservationCreateView.as_view(), name='reservation_create'),
     path('reservations/edit/<int:pk>/', ReservationEditView.as_view(), name='reservation_edit'),
     path('reservations/delete/<int:pk>/', ReservationDeleteView.as_view(), name='reservation_delete'),
+    path('get-available-slots/', views.get_available_slots, name='get_available_slots'),
 ]

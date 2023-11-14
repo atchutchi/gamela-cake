@@ -3,9 +3,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.views import generic
 from django.urls import reverse_lazy
+from django.http import JsonResponse
 from .models import Reservation, Cake
+import datetime
 from .forms import ReservationForm
-from . import views
 
 class HomeView(TemplateView):
     template_name = 'index.html'
@@ -56,3 +57,14 @@ class ReservationDeleteView(DeleteView):
     model = Reservation
     template_name = 'reservation_confirm_delete.html'
     success_url = reverse_lazy('reservations')
+
+def get_available_slots(request):
+    date = request.GET.get('date')  
+    date = datetime.datetime.strptime(date, '%Y-%m-%d').date()
+    
+    # time slots
+    slots = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00']
+    booked_slots = Reservation.objects.filter(datetime__date=date).values_list('datetime__time', flat=True)
+    available_slots = [slot for slot in slots if slot not in booked_slots]
+
+    return JsonResponse({'available_slots': available_slots})
