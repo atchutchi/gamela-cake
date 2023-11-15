@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Cake, Reservation, Order  # Import the models to be used in the admin site
+from django.contrib.auth.models import User
 
 # Admin configuration for the Cake model
 @admin.register(Cake)

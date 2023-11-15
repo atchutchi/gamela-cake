@@ -1,10 +1,12 @@
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.views import generic
 from django.urls import reverse_lazy
 from django.http import JsonResponse
 from .models import Reservation, Cake
+from django.contrib.auth.mixins import LoginRequiredMixin
 import datetime
 from .forms import ReservationForm
 
@@ -37,11 +39,11 @@ class CakeListView(ListView):
 
 from .forms import ReservationForm
 
-class ReservationCreateView(CreateView):
+class ReservationCreateView(LoginRequiredMixin, CreateView):
     model = Reservation
     form_class = ReservationForm
     template_name = 'reservation_form.html'
-    success_url = reverse_lazy('reservations')
+    success_url = reverse_lazy('reservation')
     
     def form_valid(self, form):
         form.instance.user = self.request.user

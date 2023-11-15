@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime
 from django.utils import timezone
+from django.conf import settings
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
@@ -31,7 +32,7 @@ class Cake(models.Model):
 
 # Reservation model to store booking details
 class Reservation(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     datetime = models.DateTimeField(default=timezone.now)
     created_at = models.DateTimeField(auto_now_add=True)
     SIZE_CHOICES = [
