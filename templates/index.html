@@ -13,21 +13,24 @@
     </div>
 </section>
 
-
 <!-- Featured Cakes Section -->
-<section class="featured-cakes">
+<section class="featured-cakes text-center my-5">
     <div class="container">
-        <h2>Featured Cakes</h2>
+        <h2 class="mb-4">Featured Cakes</h2>
+        <a href="#" class="btn btn-primary mb-4">Order Now</a>
         <div class="row">
-            <!-- Dynamically load featured cakes here -->
             {% for cake in cakes %}
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="{{ cake.image.url }}" class="card-img-top" alt="{{ cake.name }}">
+            <div class="col-md-4 mb-3">
+                <div class="card border-0">
                     <div class="card-body">
-                        <h5 class="card-title">{{ cake.name }}</h5>
-                        <p class="card-text">{{ cake.description }}</p>
-                        <a href="#" class="btn btn-primary">Order Now</a>
+                        <div class="card-img-top bg-light d-flex justify-content-center align-items-center" style="height: 200px;">
+                            <span class="text-secondary">Cake Image</span>
+                        </div>
+                        {% if cake.is_best_seller %}
+                        <span class="badge badge-success position-absolute" style="top: 10px; left: 10px;">Best Seller</span>
+                        {% endif %}
+                        <h5 class="card-title mt-3">{{ cake.name }}</h5>
+                        <p class="card-text">Starting from {{ cake.price }}</p>
                     </div>
                 </div>
             </div>
@@ -35,6 +38,7 @@
         </div>
     </div>
 </section>
+
 
 <!-- About Section -->
 <section class="about">
