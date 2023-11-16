@@ -2,23 +2,30 @@
 
 {% load static %}
 
-
 {% block extrahead %}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 {% endblock %}
 
 {% block content %}
-  <h2>Create Reservation</h2>
-  <form method="post">
+<h2>Create Reservation</h2>
+
+<!-- show messages -->
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Save</button>
-  </form>
+</form>
 {% endblock %}
 
 {% block extrajs %}
-
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="{% static 'js/script.js' %}"></script>
-
 {% endblock %}

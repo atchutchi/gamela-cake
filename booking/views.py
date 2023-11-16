@@ -10,6 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.core.exceptions import ValidationError
 from datetime import datetime, timedelta
+from django.contrib import messages
 from .forms import ReservationForm
 
 class HomeView(TemplateView):
@@ -58,19 +59,30 @@ class ReservationCreateView(LoginRequiredMixin, CreateView):
     form_class = ReservationForm
     template_name = 'reservation_form.html'
     success_url = reverse_lazy('reservation')
-    
+
     def form_valid(self, form):
+
+        # Ensure this matches the field name in your form        
         desired_time = form.cleaned_data['datetime']  # Ensure this matches the field name in your form
 
+        # Check if the reservation time slot is already booked
         if Reservation.objects.filter(
             Q(datetime__gte=desired_time - timedelta(hours=2),
-            datetime__lte=desired_time + timedelta(hours=2))
+              datetime__lte=desired_time + timedelta(hours=2))
         ).exclude(pk=self.object.pk if self.object else None).exists():
             form.add_error('datetime', 'This time slot is already booked. Please choose another time.')
+            messages.error(self.request, 'This time slot is already booked. Please choose another time.')
             return self.form_invalid(form)
 
-        form.instance.user = self.request.user
+        # Assign the current user to the reservation before saving
+        reservation = form.save(commit=False)
+        reservation.user = self.request.user
+        reservation.save()
+
+        # Add a success message
+        messages.success(self.request, 'Your reservation has been successfully made.')
         return super().form_valid(form)
+
 
 
 class ReservationEditView(UpdateView):
