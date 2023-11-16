@@ -9,6 +9,7 @@ from .models import Reservation, Cake
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.core.exceptions import ValidationError
+from django.shortcuts import redirect
 from datetime import datetime, timedelta
 from django.contrib import messages
 from .forms import ReservationForm
@@ -85,11 +86,24 @@ class ReservationCreateView(LoginRequiredMixin, CreateView):
 
 
 
-class ReservationEditView(UpdateView):
+class ReservationEditView(LoginRequiredMixin, UpdateView):
     model = Reservation
     form_class = ReservationForm
     template_name = 'reservation_edit.html'
     success_url = reverse_lazy('reservations')
+
+    def form_valid(self, form):
+        # Cutoff time for modifications (e.g. 24 hours in advance)
+        cutoff_time = timedelta(hours=24)
+
+        # Check if the reservation is within the cut-off time
+        if timezone.now() >= self.object.datetime - cutoff_time:
+            messages.error(self.request, "It's too late to modify this reservation.")
+            return redirect('reservation')
+
+        # Continue with the update if it is outside the cutoff time
+        messages.success(self.request, "Your reservation has been successfully updated.")
+        return super().form_valid(form)
 
 class ReservationDeleteView(DeleteView):
     model = Reservation
