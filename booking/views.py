@@ -11,6 +11,7 @@ from django.db.models import Q
 from django.core.exceptions import ValidationError
 from django.shortcuts import redirect
 from datetime import datetime, timedelta
+from django.utils import timezone
 from django.contrib import messages
 from .forms import ReservationForm
 
@@ -90,7 +91,7 @@ class ReservationEditView(LoginRequiredMixin, UpdateView):
     model = Reservation
     form_class = ReservationForm
     template_name = 'reservation_edit.html'
-    success_url = reverse_lazy('reservations')
+    success_url = reverse_lazy('reservation')
 
     def form_valid(self, form):
         # Cutoff time for modifications (e.g. 24 hours in advance)
