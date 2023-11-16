@@ -1,9 +1,11 @@
 from django.db import models
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.utils import timezone
 from django.conf import settings
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
+from django.core.exceptions import ValidationError
+from django.db.models import Q
 
 # Custom User model extending the default Django User
 class User(models.Model):
@@ -66,6 +68,16 @@ class Reservation(models.Model):
     # String representation of the Reservation model
     def __str__(self):
         return f"Reservation for {self.user.username} on {self.datetime}"
+
+    def save(self, *args, **kwargs):
+        # Example of using timedelta with datetime
+        if Reservation.objects.filter(
+            Q(datetime__gte=self.datetime - timedelta(hours=2),
+            datetime__lte=self.datetime + timedelta(hours=2))
+        ).exclude(pk=self.pk).exists():
+            raise ValidationError('This reservation overlaps with an existing one.')
+
+        super(Reservation, self).save(*args, **kwargs)
 
 # Order model to store order details associated with a reservation
 class Order(models.Model):

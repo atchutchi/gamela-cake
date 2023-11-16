@@ -3,6 +3,16 @@
 {% block content %}
   <div class="container mt-4">
     <h2>Our Cakes</h2>
+    <form method="get" class="mb-4">
+      <input type="text" name="filter_by" placeholder="Search Cakes" value="{{ request.GET.filter_by }}">
+      <select name="order_by">
+          <option value="">Order By</option>
+          <option value="price" {% if request.GET.order_by == 'price' %}selected{% endif %}>Price</option>
+          <option value="name" {% if request.GET.order_by == 'name' %}selected{% endif %}>Name</option>
+      </select>
+      <button type="submit">Filter/Sort</button>
+    </form>
+    
     <div class="row">
       {% for cake in cakes %}
         <div class="col-md-4 mb-3">

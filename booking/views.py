@@ -7,7 +7,9 @@ from django.urls import reverse_lazy
 from django.http import JsonResponse
 from .models import Reservation, Cake
 from django.contrib.auth.mixins import LoginRequiredMixin
-import datetime
+from django.db.models import Q
+from django.core.exceptions import ValidationError
+from datetime import datetime, timedelta
 from .forms import ReservationForm
 
 class HomeView(TemplateView):
@@ -36,8 +38,20 @@ class CakeListView(ListView):
     model = Cake
     context_object_name = 'cakes'
     template_name = 'cake.html'
+    paginate_by = 10  # control cakes per pages
 
-from .forms import ReservationForm
+    def get_queryset(self):
+        queryset = Cake.objects.all()
+        order = self.request.GET.get('order_by')
+        filter_by = self.request.GET.get('filter_by')
+
+        if filter_by:
+            queryset = queryset.filter(name__icontains=filter_by)
+
+        if order:
+            queryset = queryset.order_by(order)
+
+        return queryset
 
 class ReservationCreateView(LoginRequiredMixin, CreateView):
     model = Reservation
@@ -46,8 +60,18 @@ class ReservationCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('reservation')
     
     def form_valid(self, form):
+        desired_time = form.cleaned_data['datetime']  # Ensure this matches the field name in your form
+
+        if Reservation.objects.filter(
+            Q(datetime__gte=desired_time - timedelta(hours=2),
+            datetime__lte=desired_time + timedelta(hours=2))
+        ).exclude(pk=self.object.pk if self.object else None).exists():
+            form.add_error('datetime', 'This time slot is already booked. Please choose another time.')
+            return self.form_invalid(form)
+
         form.instance.user = self.request.user
         return super().form_valid(form)
+
 
 class ReservationEditView(UpdateView):
     model = Reservation
