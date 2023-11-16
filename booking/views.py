@@ -23,10 +23,17 @@ class SignUpView(generic.CreateView):
     success_url = reverse_lazy('login')
     template_name = 'registration/signup.html'
 
-class UserListView(ListView):
+class UserListView(LoginRequiredMixin, ListView):
     model = User
-    context_object_name = 'users'
     template_name = 'user.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        current_time = timezone.now()
+        context['upcoming_reservations'] = Reservation.objects.filter(user=user, datetime__gte=current_time)
+        context['past_reservations'] = Reservation.objects.filter(user=user, datetime__lt=current_time)
+        return context
 
 class ReservationListView(ListView):  
     model = Reservation  

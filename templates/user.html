@@ -2,10 +2,32 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h2>Perfil do Usuário</h2>
-    <!-- Aqui você pode adicionar informações do perfil do usuário -->
-    <p>Nome: {{ user.get_full_name }}</p>
+    <h2>User Profile</h2>
+    <p>Name: {{ user.get_full_name }}</p>
     <p>Email: {{ user.email }}</p>
-    <!-- Outros detalhes do usuário -->
+
+    <!-- Upcoming Reservations -->
+    <h3>Upcoming Reservations</h3>
+    <div class="list-group">
+        {% for reservation in upcoming_reservations %}
+            <a href="{% url 'reservation_edit' reservation.id %}" class="list-group-item list-group-item-action">
+                {{ reservation.datetime|date:"d M Y H:i" }} - {{ reservation.cake.name }}
+            </a>
+        {% empty %}
+            <p>No upcoming reservations.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Past Reservations -->
+    <h3>Past Reservations</h3>
+    <div class="list-group">
+        {% for reservation in past_reservations %}
+            <div class="list-group-item">
+                {{ reservation.datetime|date:"d M Y H:i" }} - {{ reservation.cake.name }}
+            </div>
+        {% empty %}
+            <p>No past reservations.</p>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
