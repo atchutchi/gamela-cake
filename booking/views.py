@@ -9,10 +9,11 @@ from .models import Reservation, Cake
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.core.exceptions import ValidationError
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from datetime import datetime, timedelta
 from django.utils import timezone
 from django.contrib import messages
+from django.core.mail import send_mail
 from .forms import ReservationForm
 
 class HomeView(TemplateView):
@@ -128,3 +129,22 @@ def get_available_slots(request):
     available_slots = [slot for slot in slots if slot not in booked_slots]
 
     return JsonResponse({'available_slots': available_slots})
+
+class ReservationCancelView(LoginRequiredMixin, View):
+    def post(self, request, pk):
+        reservation = get_object_or_404(Reservation, pk=pk, user=request.user)
+        cutoff_time = timedelta(hours=24)
+
+        if timezone.now() <= reservation.datetime - cutoff_time:
+            reservation.delete()
+            send_mail(
+                'Reservation Cancellation Confirmation',
+                'Your reservation has been successfully cancelled.',
+                'ferreira.atchutchi@gmail.com',  # admin email
+                [request.user.email],
+                fail_silently=False,
+            )
+            messages.success(request, 'Reservation cancelled successfully.')
+        else:
+            messages.error(request, "It's too late to cancel this reservation.")
+        return redirect('reservation')

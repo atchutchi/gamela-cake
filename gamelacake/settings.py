@@ -145,3 +145,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'home'  # Redirect to home after login
 LOGOUT_REDIRECT_URL = 'home'  # Redirect to home after logout
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'ferreira.atchutchi@gmail.com'
+EMAIL_HOST_PASSWORD = 'ARN/2023'
+DEFAULT_FROM_EMAIL = 'ferreira.atchutchi@gmail.com'

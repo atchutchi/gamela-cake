@@ -24,6 +24,10 @@
                 <td>
                     <a href="{% url 'reservation_edit' reservation.id %}" class="btn btn-primary btn-sm">Edit</a>
                     <a href="{% url 'reservation_delete' reservation.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    <form action="{% url 'reservation_cancel' reservation.id %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-warning btn-sm">Cancel</button>
+                    </form>
                 </td>
             </tr>
             {% empty %}

@@ -25,5 +25,6 @@ urlpatterns = [
     path('reservations/add/', ReservationCreateView.as_view(), name='reservation_create'),
     path('reservations/edit/<int:pk>/', ReservationEditView.as_view(), name='reservation_edit'),
     path('reservations/delete/<int:pk>/', ReservationDeleteView.as_view(), name='reservation_delete'),
+    path('reservations/cancel/<int:pk>/', views.ReservationCancelView.as_view(), name='reservation_cancel'),
     path('get-available-slots/', views.get_available_slots, name='get_available_slots'),
 ]
