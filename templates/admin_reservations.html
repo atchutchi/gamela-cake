@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <!-- Add new reservation -->
+  <div class="container mt-4">
+    <a href="{% url 'reservation_create' %}" class="btn btn-success mb-3">Add New Reservation</a>
+
+    <!-- Tabela de reservas -->
+    <table class="table table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">DateTime</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reservation in reservations %}
+            <tr>
+                <th scope="row">{{ reservation.id }}</th>
+                <td>{{ reservation.user.username }}</td> <!-- Ajuste para mostrar o nome do usuário -->
+                <td>{{ reservation.datetime|date:"d M Y H:i" }}</td> <!-- Formatação da data e hora -->
+                <td>
+                    <a href="{% url 'reservation_edit' reservation.id %}" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="{% url 'reservation_delete' reservation.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    <form action="{% url 'reservation_cancel' reservation.id %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-warning btn-sm">Cancel</button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="text-center">No reservations found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+  </div>
+{% endblock %}

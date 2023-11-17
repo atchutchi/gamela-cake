@@ -37,14 +37,16 @@ class UserListView(LoginRequiredMixin, ListView):
         context['past_reservations'] = Reservation.objects.filter(user=user, datetime__lt=current_time)
         return context
 
-class ReservationListView(ListView):  
-    model = Reservation  
-    context_object_name = 'reservations'
+class ReservationListView(LoginRequiredMixin, ListView):
+    model = Reservation
     template_name = 'reservations.html'
 
     def get_queryset(self):
-        
-        return Reservation.objects.all()  
+        user = self.request.user
+        if user.is_superuser:
+            return Reservation.objects.all()
+        else:
+            return Reservation.objects.filter(user=user)
 
 class CakeListView(ListView):
     model = Cake
@@ -149,3 +151,19 @@ class ReservationCancelView(LoginRequiredMixin, View):
         else:
             messages.error(request, "It's too late to cancel this reservation.")
         return redirect('reservation')
+
+#admin super user
+class AdminReservationListView(LoginRequiredMixin, ListView):
+    model = Reservation
+    template_name = 'admin_reservations.html' 
+
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return Reservation.objects.all()
+        else:
+            return Reservation.objects.none()  
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['is_superuser'] = self.request.user.is_superuser
+        return context
