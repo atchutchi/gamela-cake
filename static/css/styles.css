@@ -98,6 +98,7 @@ h1, h2, h3 {
 
 body {
   margin: 0;
+  height: 100%;
   font-family: 'Open Sans', sans-serif;
   font-family: var(--bs-body-font-family);
   font-size: var(--bs-body-font-size);
