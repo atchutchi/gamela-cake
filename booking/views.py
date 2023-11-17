@@ -67,6 +67,11 @@ class CakeListView(ListView):
 
         return queryset
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['reservation_form'] = ReservationForm()  # Add new reservation
+        return context
+
 class ReservationCreateView(LoginRequiredMixin, CreateView):
     model = Reservation
     form_class = ReservationForm
@@ -95,8 +100,13 @@ class ReservationCreateView(LoginRequiredMixin, CreateView):
         # Add a success message
         messages.success(self.request, 'Your reservation has been successfully made.')
         return super().form_valid(form)
-
-
+    
+    def get_initial(self):
+        initial = super().get_initial()
+        cake_id = self.request.GET.get('cake_id')
+        if cake_id:
+            initial['cake'] = cake_id
+        return initial
 
 class ReservationEditView(LoginRequiredMixin, UpdateView):
     model = Reservation

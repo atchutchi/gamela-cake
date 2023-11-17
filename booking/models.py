@@ -64,6 +64,7 @@ class Reservation(models.Model):
     batter = models.CharField(max_length=1, choices=BATTER_CHOICES, default='N')
     filling = models.CharField(max_length=2, choices=FILLING_CHOICES, default='BR')
     special_request = models.TextField(blank=True, null=True)
+    cake = models.ForeignKey(Cake, on_delete=models.SET_NULL, null=True, blank=True)
 
     # String representation of the Reservation model
     def __str__(self):

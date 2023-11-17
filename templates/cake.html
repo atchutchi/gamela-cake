@@ -11,6 +11,7 @@
           <option value="name" {% if request.GET.order_by == 'name' %}selected{% endif %}>Name</option>
       </select>
       <button type="submit">Filter/Sort</button>
+      <a href="{% url 'reservation_create' %}" class="btn btn-success mb-3">Customize Your Cake</a>
     </form>
     
     <div class="row">
