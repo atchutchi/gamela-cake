@@ -20,7 +20,7 @@ urlpatterns = [
     path('signup/', SignUpView.as_view(), name='signup'),
     path('users/', UserListView.as_view(), name='user'),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('reservations/', ReservationListView.as_view(), name='reservation'),
+    path('reservations/', ReservationListView.as_view(), name='reservations'),
     path('cakes/', CakeListView.as_view(), name='cake'),
     path('reservations/add/', ReservationCreateView.as_view(), name='reservation_create'),
     path('reservations/edit/<int:pk>/', ReservationEditView.as_view(), name='reservation_edit'),
