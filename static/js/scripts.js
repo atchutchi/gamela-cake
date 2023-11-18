@@ -3,12 +3,10 @@
 * Copyright 2013-2023 Start Bootstrap
 * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-agency/blob/master/LICENSE)
 */
-//
+
 // Scripts
-// 
 
 window.addEventListener('DOMContentLoaded', event => {
-
     // Navbar shrink function
     var navbarShrink = function () {
         const navbarCollapsible = document.body.querySelector('#mainNav');
@@ -20,16 +18,13 @@ window.addEventListener('DOMContentLoaded', event => {
         } else {
             navbarCollapsible.classList.add('navbar-shrink')
         }
-
     };
 
-    // Shrink the navbar 
+    // Shrink the navbar when the page is scrolled
     navbarShrink();
-
-    // Shrink the navbar when page is scrolled
     document.addEventListener('scroll', navbarShrink);
 
-    //  Activate Bootstrap scrollspy on the main nav element
+    // Activate Bootstrap scrollspy on the main nav element
     const mainNav = document.body.querySelector('#mainNav');
     if (mainNav) {
         new bootstrap.ScrollSpy(document.body, {
@@ -51,49 +46,49 @@ window.addEventListener('DOMContentLoaded', event => {
         });
     });
 
-});
-
-
-flatpickr("#id_datetime", {
-    enableTime: true,
-    dateFormat: "Y-m-d H:i",
-    minDate: "today",
-    time_24hr: true,
-});
-
-
-document.getElementById('id_date').addEventListener('change', function() {
-    var selectedDate = this.value;
-    fetch(`/get-available-slots/?date=${selectedDate}`)
-        .then(response => response.json())
-        .then(data => {
-            // Clear existing options
-            var timeSelect = document.getElementById('id_time');
-            timeSelect.innerHTML = '';
-
-            // Populate time select with available slots
-            data.available_slots.forEach(function(slot) {
-                var option = document.createElement('option');
-                option.value = slot;
-                option.text = slot;
-                timeSelect.appendChild(option);
-            });
+    // Setup for the confirmation modal
+    var confirmReservationModal = document.getElementById('confirmReservationModal');
+    if (confirmReservationModal) {
+        confirmReservationModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var cakeId = button.getAttribute('data-cake-id');
+            var confirmButton = confirmReservationModal.querySelector('#confirmReservationButton');
+            confirmButton.onclick = function () {
+                confirmReservation(cakeId);
+            };
         });
+    }
 });
 
+// Flatpickr setup for date and time selection
+if (document.getElementById("id_datetime")) {
+    flatpickr("#id_datetime", {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+        minDate: "today",
+        time_24hr: true,
+    });
+}
 
-// confirmation modal
-var confirmReservationModal = document.getElementById('confirmReservationModal')
-    confirmReservationModal.addEventListener('show.bs.modal', function (event) {
-        var button = event.relatedTarget
-        var cakeId = button.getAttribute('data-cake-id')
-        var confirmButton = confirmReservationModal.querySelector('#confirmReservationButton')
-        confirmButton.onclick = function () {
-            // Redirect to the reservation creation page with the selected cake ID
-            window.location.href = `{% url 'reservation_create' %}?cake_id=${cakeId}`;
-        }
-    })
-
+// Event listener for date selection
+var dateElement = document.getElementById('id_date');
+if (dateElement) {
+    dateElement.addEventListener('change', function() {
+        var selectedDate = this.value;
+        fetch(`/get-available-slots/?date=${selectedDate}`)
+            .then(response => response.json())
+            .then(data => {
+                var timeSelect = document.getElementById('id_time');
+                timeSelect.innerHTML = '';
+                data.available_slots.forEach(function(slot) {
+                    var option = document.createElement('option');
+                    option.value = slot;
+                    option.text = slot;
+                    timeSelect.appendChild(option);
+                });
+            });
+    });
+}
 
 // Function to handle reservation confirmation
 function confirmReservation(cakeId) {
@@ -101,11 +96,16 @@ function confirmReservation(cakeId) {
         method: 'POST',
         headers: {
             'X-CSRFToken': getCookie('csrftoken'),
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
         },
-        body: 'cake_id=' + cakeId
+        body: JSON.stringify({ cake_id: cakeId })
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
     .then(data => {
         if (data.success) {
             alert('Reservation successful!');
@@ -113,5 +113,25 @@ function confirmReservation(cakeId) {
         } else {
             alert('Reservation failed.');
         }
+    })
+    .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+        alert('An error occurred. Please try again.');
     });
+}
+
+// Function to get a cookie value by name
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }

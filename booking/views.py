@@ -6,8 +6,10 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views import generic
 from django.urls import reverse_lazy
 from django.http import JsonResponse
+import json
 from .models import Reservation, Cake
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.core.exceptions import ValidationError
 from django.shortcuts import redirect, get_object_or_404
@@ -189,27 +191,34 @@ class AdminReservationListView(LoginRequiredMixin, ListView):
         return context
 
 @csrf_exempt
+@login_required
 def reserve_cake(request):
     if request.method == 'POST':
-        user = request.user
-        cake_id = request.POST.get('cake_id')
-        cake = get_object_or_404(Cake, pk=cake_id)
-        reservation = Reservation.objects.create(
-            user=user,
-            datetime=timezone.now(),
-            ready_made_cake_name=cake.name,
-            ready_made_cake_description=cake.description,
-            ready_made_cake_price=cake.price,
-            is_customized=False
-        )
-        # Send confirmation email
-        send_mail(
-            'Cake Reservation Confirmation',
-            'Your cake reservation has been successfully made.',
-            'from@example.com',
-            [user.email],
-            fail_silently=False,
-        )
-        return JsonResponse({'success': True})
+        try:
+            data = json.loads(request.body)
+            user = request.user
+            cake_id = data.get('cake_id')
+            cake = get_object_or_404(Cake, pk=cake_id)
+            reservation = Reservation.objects.create(
+                user=user,
+                datetime=timezone.now(),
+                ready_made_cake_name=cake.name,
+                ready_made_cake_description=cake.description,
+                ready_made_cake_price=cake.price,
+                is_customized=False
+            )
+            # Send confirmation email
+            send_mail(
+                'Cake Reservation Confirmation',
+                'Your cake reservation has been successfully made.',
+                'from@example.com',
+                [user.email],
+                fail_silently=False,
+            )
+            return JsonResponse({'success': True})
+        except Exception as e:
+            # Log the error for debugging
+            print(f"Error in reserve_cake: {e}")
+            return JsonResponse({'success': False, 'error': str(e)})
     return JsonResponse({'success': False})
     

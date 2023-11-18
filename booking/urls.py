@@ -29,4 +29,5 @@ urlpatterns = [
     path('reservations/cancel/<int:pk>/', views.ReservationCancelView.as_view(), name='reservation_cancel'),
     path('get-available-slots/', views.get_available_slots, name='get_available_slots'),
     path('admin/reservations/', views.AdminReservationListView.as_view(), name='admin_reservations'),
+    path('reserve_cake/', views.reserve_cake, name='reserve_cake'),
 ]
