@@ -65,6 +65,10 @@ class Reservation(models.Model):
     filling = models.CharField(max_length=2, choices=FILLING_CHOICES, default='BR')
     special_request = models.TextField(blank=True, null=True)
     cake = models.ForeignKey(Cake, on_delete=models.SET_NULL, null=True, blank=True)
+    is_customized = models.BooleanField(default=True)
+    ready_made_cake_name = models.CharField(max_length=255, blank=True, null=True)
+    ready_made_cake_description = models.TextField(blank=True, null=True)
+    ready_made_cake_price = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
 
     # String representation of the Reservation model
     def __str__(self):

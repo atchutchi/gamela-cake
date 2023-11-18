@@ -93,3 +93,25 @@ var confirmReservationModal = document.getElementById('confirmReservationModal')
             window.location.href = `{% url 'reservation_create' %}?cake_id=${cakeId}`;
         }
     })
+
+
+// Function to handle reservation confirmation
+function confirmReservation(cakeId) {
+    fetch('/reserve_cake/', {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'cake_id=' + cakeId
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Reservation successful!');
+            location.reload();
+        } else {
+            alert('Reservation failed.');
+        }
+    });
+}

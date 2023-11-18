@@ -16,6 +16,7 @@ from django.utils import timezone
 from django.contrib import messages
 from django.core.mail import send_mail
 from .forms import ReservationForm
+from django.views.decorators.csrf import csrf_exempt
 
 class HomeView(TemplateView):
     template_name = 'index.html'
@@ -186,3 +187,29 @@ class AdminReservationListView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['is_superuser'] = self.request.user.is_superuser
         return context
+
+@csrf_exempt
+def reserve_cake(request):
+    if request.method == 'POST':
+        user = request.user
+        cake_id = request.POST.get('cake_id')
+        cake = get_object_or_404(Cake, pk=cake_id)
+        reservation = Reservation.objects.create(
+            user=user,
+            datetime=timezone.now(),
+            ready_made_cake_name=cake.name,
+            ready_made_cake_description=cake.description,
+            ready_made_cake_price=cake.price,
+            is_customized=False
+        )
+        # Send confirmation email
+        send_mail(
+            'Cake Reservation Confirmation',
+            'Your cake reservation has been successfully made.',
+            'from@example.com',
+            [user.email],
+            fail_silently=False,
+        )
+        return JsonResponse({'success': True})
+    return JsonResponse({'success': False})
+    
