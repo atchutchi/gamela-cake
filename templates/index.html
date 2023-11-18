@@ -3,48 +3,107 @@
 {% block title %}Home - Gamela Cake{% endblock %}
 
 {% block content %}
-<!-- landing page Section -->
-<section class="landing_page-section text-center">
-    <div class="container py-5 my-5">
-        <h1 class="mb-3">Welcome to Cake Booking</h1>
-        <p class="mb-4">Order delicious cakes for any occasion</p>
-        <a href="{% url 'reservation' %}" class="btn btn-dark btn-lg mr-2">Make Reservation</a>
-        <a href="{% url 'cake' %}" class="btn btn-outline-dark btn-lg">View Cakes</a>
-    </div>
-</section>
+    <!-- Masthead  -->
+    <header class="masthead">
+        <div class="container">
+            <div class="masthead-subheading">Welcome to Cake Booking</div>
+            <div class="masthead-heading text-uppercase">Order Delicious Cakes for Any Occasion</div>
+            <a href="{% url 'reservation' %}" class="btn btn-primary btn-xl text-uppercase">Make Reservation</a>
+            <a href="{% url 'cake' %}" class="btn btn-outline-light btn-xl text-uppercase">View Cakes</a>
+        </div>
+    </header>
 
-<!-- Featured Cakes Section -->
-<section class="featured-cakes text-center my-5">
-    <div class="container">
-        <h2 class="mb-4">Featured Cakes</h2>
-        <a href="#" class="btn btn-primary mb-4">Order Now</a>
-        <div class="row">
-            {% for cake in cakes %}
-            <div class="col-md-4 mb-3">
-                <div class="card border-0">
-                    <div class="card-body">
-                        <div class="card-img-top bg-light d-flex justify-content-center align-items-center" style="height: 200px;">
-                            <span class="text-secondary">Cake Image</span>
+    <!-- Section Portfolio -->
+    <section class="page-section bg-light" id="portfolio">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Featured Cakes</h2>
+                <h3 class="section-subheading text-muted">Check out our best sellers and seasonal offers</h3>
+            </div>
+            <div class="row">
+                {% for cake in cakes %}
+                <div class="col-lg-4 col-sm-6 mb-4">
+                    <div class="portfolio-item">
+                        <a class="portfolio-link" data-bs-toggle="modal" href="#cakeModal{{ cake.id }}">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                            </div>
+                            <img class="img-fluid" src="{{ cake.image.url }}" alt="{{ cake.name }}" />
+                        </a>
+                        <div class="portfolio-caption">
+                            <div class="portfolio-caption-heading">{{ cake.name }}</div>
+                            <div class="portfolio-caption-subheading text-muted">Starting from {{ cake.price }}</div>
                         </div>
-                        {% if cake.is_best_seller %}
-                        <span class="badge badge-success position-absolute" style="top: 10px; left: 10px;">Best Seller</span>
-                        {% endif %}
-                        <h5 class="card-title mt-3">{{ cake.name }}</h5>
-                        <p class="card-text">Starting from {{ cake.price }}</p>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
-    </div>
-</section>
+    </section>
 
+    <!-- Contact-->
+    <section class="page-section" id="contact">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Contact Us</h2>
+                <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+            </div>
+            <!-- * * * * * * * * * * * * * * *-->
+            <!-- * * SB Forms Contact Form * *-->
+            <!-- * * * * * * * * * * * * * * *-->
+            <!-- This form is pre-integrated with SB Forms.-->
+            <!-- To make this form functional, sign up at-->
+            <!-- https://startbootstrap.com/solution/contact-forms-->
+            <!-- to get an API token!-->
+            <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                <div class="row align-items-stretch mb-5">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <!-- Name input-->
+                            <input class="form-control" id="name" type="text" placeholder="Your Name *" data-sb-validations="required" />
+                            <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                        </div>
+                        <div class="form-group">
+                            <!-- Email address input-->
+                            <input class="form-control" id="email" type="email" placeholder="Your Email *" data-sb-validations="required,email" />
+                            <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
+                            <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                        </div>
+                        <div class="form-group mb-md-0">
+                            <!-- Phone number input-->
+                            <input class="form-control" id="phone" type="tel" placeholder="Your Phone *" data-sb-validations="required" />
+                            <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group form-group-textarea mb-md-0">
+                            <!-- Message input-->
+                            <textarea class="form-control" id="message" placeholder="Your Message *" data-sb-validations="required"></textarea>
+                            <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Submit success message-->
+                <!---->
+                <!-- This is what your users will see when the form-->
+                <!-- has successfully submitted-->
+                <div class="d-none" id="submitSuccessMessage">
+                    <div class="text-center text-white mb-3">
+                        <div class="fw-bolder">Form submission successful!</div>
+                        To activate this form, sign up at
+                        <br />
+                        <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                    </div>
+                </div>
+                <!-- Submit error message-->
+                <!---->
+                <!-- This is what your users will see when there is-->
+                <!-- an error submitting the form-->
+                <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                <!-- Submit Button-->
+                <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">Send Message</button></div>
+            </form>
+        </div>
+    </section>
 
-<!-- About Section -->
-<section class="about">
-    <div class="container">
-        <h2>About Us</h2>
-        <p>We are a family-owned bakery that has been serving the community with fresh cakes and pastries made with love and the finest ingredients since 1999.</p>
-    </div>
-</section>
 {% endblock %}

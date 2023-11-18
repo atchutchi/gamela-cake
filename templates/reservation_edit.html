@@ -1,10 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h2>Edit Reservation</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save changes</button>
-  </form>
+<section class="page-section">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Edit Reservation</h2>
+            <h3 class="section-subheading text-muted">Modify your cake reservation details</h3>
+        </div>
+
+        <form method="post" class="form-reservation-edit">
+            {% csrf_token %}
+            <div class="row justify-content-center">
+                {{ form.as_p }}
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-xl text-uppercase">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</section>
 {% endblock %}

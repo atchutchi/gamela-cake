@@ -4,25 +4,37 @@
 
 {% block extrahead %}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link href="{% static 'css/styles.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
-<h2>Create Reservation</h2>
-
-<!-- show messages -->
-{% if messages %}
-    {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
-            {{ message }}
+<section class="page-section">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Create Reservation</h2>
+            <h3 class="section-subheading text-muted">Book your cake today</h3>
         </div>
-    {% endfor %}
-{% endif %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
-</form>
+        <!-- Show messages -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} text-center">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post" class="form-reservation">
+            {% csrf_token %}
+            <div class="row justify-content-center">
+                {{ form.as_p }}
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-xl text-uppercase">Save Reservation</button>
+            </div>
+        </form>
+    </div>
+</section>
 {% endblock %}
 
 {% block extrajs %}

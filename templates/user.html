@@ -1,33 +1,43 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2>User Profile</h2>
-    <p>Name: {{ user.get_full_name }}</p>
-    <p>Email: {{ user.email }}</p>
-
-    <!-- Upcoming Reservations -->
-    <h3>Upcoming Reservations</h3>
-    <div class="list-group">
-        {% for reservation in upcoming_reservations %}
-            <a href="{% url 'reservation_edit' reservation.id %}" class="list-group-item list-group-item-action">
-                {{ reservation.datetime|date:"d M Y H:i" }} - {{ reservation.cake.name }}
-            </a>
-        {% empty %}
-            <p>No upcoming reservations.</p>
-        {% endfor %}
-    </div>
-
-    <!-- Past Reservations -->
-    <h3>Past Reservations</h3>
-    <div class="list-group">
-        {% for reservation in past_reservations %}
-            <div class="list-group-item">
-                {{ reservation.datetime|date:"d M Y H:i" }} - {{ reservation.cake.name }}
+    <!-- User Profile Section -->
+    <section class="page-section">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">User Profile</h2>
+                <h3 class="section-subheading text-muted">{{ user.get_full_name }}</h3>
             </div>
-        {% empty %}
-            <p>No past reservations.</p>
-        {% endfor %}
-    </div>
-</div>
+
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <p class="large text-muted">Email: {{ user.email }}</p>
+
+                    <!-- Upcoming Reservations -->
+                    <h4 class="text-uppercase mt-4">Upcoming Reservations</h4>
+                    <div class="list-group">
+                        {% for reservation in upcoming_reservations %}
+                            <a href="{% url 'reservation_edit' reservation.id %}" class="list-group-item list-group-item-action">
+                                {{ reservation.datetime|date:"d M Y H:i" }} - {{ reservation.cake.name }}
+                            </a>
+                        {% empty %}
+                            <p class="text-muted">No upcoming reservations.</p>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Past Reservations -->
+                    <h4 class="text-uppercase mt-4">Past Reservations</h4>
+                    <div class="list-group">
+                        {% for reservation in past_reservations %}
+                            <div class="list-group-item">
+                                {{ reservation.datetime|date:"d M Y H:i" }} - {{ reservation.cake.name }}
+                            </div>
+                        {% empty %}
+                            <p class="text-muted">No past reservations.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}
