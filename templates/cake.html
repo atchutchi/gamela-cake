@@ -24,7 +24,7 @@
             <!-- Cakes Display -->
             <div class="row">
                 {% for cake in cakes %}
-                <div class="col-md-4 mb-3">
+                <div class="col-lg-4 col-sm-6 mb-4">
                     <div class="portfolio-item">
                         <a class="portfolio-link" data-bs-toggle="modal" href="#cakeModal{{ cake.id }}">
                             <div class="portfolio-hover">
@@ -34,17 +34,33 @@
                         </a>
                         <div class="portfolio-caption">
                             <div class="portfolio-caption-heading">{{ cake.name }}</div>
-                            <div class="portfolio-caption-subheading text-muted">{{ cake.description }}</div>
-                            <p>Price: ${{ cake.price }}</p>
+                            <div class="portfolio-caption-subheading text-muted">Starting from {{ cake.price }}</div>
                         </div>
                     </div>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmReservationModal" data-cake-id="{{ cake.id }}">Make Reservation</button>
                 </div>
                 {% empty %}
                 <div class="col-12">
                     <p class="text-center">No cakes available.</p>
                 </div>
                 {% endfor %}
-            </div>
-        </div>
-    </section>
+                <!-- Confirmation Modal -->
+                <div class="modal fade" id="confirmReservationModal" tabindex="-1" aria-labelledby="confirmReservationModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmReservationModalLabel">Confirm Reservation</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Do you want to make a reservation for this cake?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" id="confirmReservationButton">Confirm</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 {% endblock %}

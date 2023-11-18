@@ -23,6 +23,7 @@ urlpatterns = [
     path('reservations/', ReservationListView.as_view(), name='reservations'),
     path('cakes/', CakeListView.as_view(), name='cake'),
     path('reservations/add/', ReservationCreateView.as_view(), name='reservation_create'),
+    path('reservations/create/', ReservationCreateView.as_view(), name='reservation_create'),
     path('reservations/edit/<int:pk>/', ReservationEditView.as_view(), name='reservation_edit'),
     path('reservations/delete/<int:pk>/', ReservationDeleteView.as_view(), name='reservation_delete'),
     path('reservations/cancel/<int:pk>/', views.ReservationCancelView.as_view(), name='reservation_cancel'),

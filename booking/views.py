@@ -109,10 +109,12 @@ class ReservationCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
     
     def get_initial(self):
+        # Get initial data for the form
         initial = super().get_initial()
         cake_id = self.request.GET.get('cake_id')
         if cake_id:
-            initial['cake'] = cake_id
+            # Pre-select the cake in the reservation form based on the passed cake_id
+            initial['cake'] = Cake.objects.get(id=cake_id)
         return initial
 
 class ReservationEditView(LoginRequiredMixin, UpdateView):

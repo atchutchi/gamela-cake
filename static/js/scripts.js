@@ -80,3 +80,16 @@ document.getElementById('id_date').addEventListener('change', function() {
             });
         });
 });
+
+
+// confirmation modal
+var confirmReservationModal = document.getElementById('confirmReservationModal')
+    confirmReservationModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget
+        var cakeId = button.getAttribute('data-cake-id')
+        var confirmButton = confirmReservationModal.querySelector('#confirmReservationButton')
+        confirmButton.onclick = function () {
+            // Redirect to the reservation creation page with the selected cake ID
+            window.location.href = `{% url 'reservation_create' %}?cake_id=${cakeId}`;
+        }
+    })
