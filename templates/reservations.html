@@ -9,25 +9,22 @@
                 <h3 class="section-subheading text-muted">Manage your cake reservations</h3>
             </div>
 
-            <!-- Section for Ready-Made Cake Reservations -->
-            <h3 class="section-subheading text-muted">Ready-Made Cake Reservations</h3>
+            <!-- Section for Cake Reservations -->
+            <h3 class="section-subheading text-muted">Cake Reservations</h3>
             <table class="table table-hover">
                 <thead class="table-dark">
                     <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Description</th>
+                        <th scope="col">Cake Name</th>
                         <th scope="col">Price</th>
-                        <th scope="col">DateTime</th>
+                        <th scope="col">Reservation Date</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for reservation in object_list %}
-                    {% if not reservation.is_customized %}
+                    {% for reservation in reservations %}
                     <tr>
-                        <td>{{ reservation.ready_made_cake_name }}</td>
-                        <td>{{ reservation.ready_made_cake_description }}</td>
-                        <td>{{ reservation.ready_made_cake_price }}</td>
+                        <td>{{ reservation.cake.name }}</td>
+                        <td>{{ reservation.cake.price }}</td>
                         <td>{{ reservation.datetime|date:"d M Y H:i" }}</td>
                         <td>
                             <a href="{% url 'reservation_delete' reservation.id %}" class="btn btn-danger btn-sm">Delete</a>
@@ -37,43 +34,9 @@
                             </form>
                         </td>
                     </tr>
-                    {% endif %}
                     {% empty %}
                     <tr>
-                        <td colspan="5" class="text-center">No ready-made cake reservations found.</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-
-
-            <!-- Section for Costumized Cake Reservations -->
-            <h3 class="section-subheading text-muted">Costumized Cake Reservations</h3>
-            <table class="table table-hover">
-                <thead class="table-dark">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">DateTime</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for reservation in object_list %}
-                    <tr>
-                        <th scope="row">{{ reservation.id }}</th>
-                        <td>{{ reservation.datetime|date:"d M Y H:i" }}</td>
-                        <td>
-                            <a href="{% url 'reservation_edit' reservation.id %}" class="btn btn-primary btn-sm">Edit</a>
-                            <a href="{% url 'reservation_delete' reservation.id %}" class="btn btn-danger btn-sm">Delete</a>
-                            <form action="{% url 'reservation_cancel' reservation.id %}" method="post" style="display: inline;">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-warning btn-sm">Cancel</button>
-                            </form>
-                        </td>
-                    </tr>
-                    {% empty %}
-                    <tr>
-                        <td colspan="3" class="text-center">No reservations found.</td>
+                        <td colspan="4" class="text-center">No cake reservations found.</td>
                     </tr>
                     {% endfor %}
                 </tbody>

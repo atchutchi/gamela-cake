@@ -54,7 +54,7 @@ window.addEventListener('DOMContentLoaded', event => {
             var cakeId = button.getAttribute('data-cake-id');
             var confirmButton = confirmReservationModal.querySelector('#confirmReservationButton');
             confirmButton.onclick = function () {
-                confirmReservation(cakeId);
+                window.location.href = `/reservations/create/${cakeId}/`; // Redireciona para a página de criação de reserva
             };
         });
     }
@@ -92,7 +92,7 @@ if (dateElement) {
 
 // Function to handle reservation confirmation
 function confirmReservation(cakeId) {
-    fetch('/reserve_cake/', {
+    fetch(`/reserve/${cakeId}/`, {
         method: 'POST',
         headers: {
             'X-CSRFToken': getCookie('csrftoken'),
