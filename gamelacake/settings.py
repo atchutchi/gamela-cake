@@ -30,8 +30,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-atchutchi-gamela-cake-me87f2j18e.us2.codeanyapp.com',
+ALLOWED_HOSTS = ['8000-atchutchi-gamela-cake-4t3ldv5121.us2.codeanyapp.com',
 'localhost']
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://8000-atchutchi-gamela-cake-4t3ldv5121.us2.codeanyapp.com',
+]
 
 
 # Application definition
