@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cloudinary_storage',
+    'crispy_forms',
+    'crispy_bootstrap4',
     'cloudinary',
     'booking',
 ]
@@ -77,6 +79,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'gamelacake.wsgi.application'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 # Database

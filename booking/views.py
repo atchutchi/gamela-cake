@@ -30,6 +30,7 @@ class HomeView(TemplateView):
         # Seleciona os primeiros 4 bolos (ajuste a query conforme necessário)
         featured_cakes = Cake.objects.all()[:4]
         context['cakes'] = featured_cakes
+        context['form'] = ContactForm()
         return context
 
 class SignUpView(generic.CreateView):
@@ -176,7 +177,8 @@ class ReservationCancelView(LoginRequiredMixin, View):
             messages.error(request, "It's too late to cancel this reservation.")
         return redirect('reservation')
 
-#admin super user
+
+# admin super user
 class AdminReservationListView(LoginRequiredMixin, ListView):
     model = Reservation
     template_name = 'admin_reservations.html' 

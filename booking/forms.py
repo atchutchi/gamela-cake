@@ -14,7 +14,7 @@ class ReservationForm(forms.ModelForm):
 
 
 class ContactForm(forms.Form):
-    name = forms.CharField(max_length=100)
+    name = forms.CharField()
     email = forms.EmailField()
-    phone = forms.CharField(max_length=20)
+    phone = forms.CharField()
     message = forms.CharField(widget=forms.Textarea)
