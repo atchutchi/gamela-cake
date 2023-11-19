@@ -1,4 +1,7 @@
-from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import (
+    TemplateView, ListView, CreateView, 
+    UpdateView, DeleteView
+)
 from django.views import View
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
@@ -33,10 +36,12 @@ class HomeView(TemplateView):
         context['form'] = ContactForm()
         return context
 
+
 class SignUpView(generic.CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'registration/signup.html'
+
 
 class UserListView(LoginRequiredMixin, ListView):
     model = User
@@ -46,9 +51,15 @@ class UserListView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         user = self.request.user
         current_time = timezone.now()
-        context['upcoming_reservations'] = Reservation.objects.filter(user=user, datetime__gte=current_time)
-        context['past_reservations'] = Reservation.objects.filter(user=user, datetime__lt=current_time)
+        context['upcoming_reservations'] = Reservation.objects.filter(
+            user=user, datetime__gte=current_time
+        )
+        context['past_reservations'] = Reservation.objects.filter(
+            user=user, datetime__lt=current_time
+        )
         return context
+
+
 
 class ReservationListView(LoginRequiredMixin, ListView):
     model = Reservation
@@ -60,6 +71,7 @@ class ReservationListView(LoginRequiredMixin, ListView):
             return Reservation.objects.all()
         else:
             return Reservation.objects.filter(user=user)
+
 
 class CakeListView(ListView):
     model = Cake
@@ -84,6 +96,7 @@ class CakeListView(ListView):
         context = super().get_context_data(**kwargs)
         context['reservation_form'] = ReservationForm()  # Add new reservation
         return context
+
 
 class ReservationCreateView(LoginRequiredMixin, CreateView):
     model = Reservation
@@ -123,6 +136,7 @@ class ReservationCreateView(LoginRequiredMixin, CreateView):
             initial['cake'] = Cake.objects.get(id=cake_id)
         return initial
 
+
 class ReservationEditView(LoginRequiredMixin, UpdateView):
     model = Reservation
     form_class = ReservationForm
@@ -142,13 +156,15 @@ class ReservationEditView(LoginRequiredMixin, UpdateView):
         messages.success(self.request, "Your reservation has been successfully updated.")
         return super().form_valid(form)
 
+
 class ReservationDeleteView(DeleteView):
     model = Reservation
     template_name = 'reservation_confirm_delete.html'
     success_url = reverse_lazy('reservations')
 
+
 def get_available_slots(request):
-    date = request.GET.get('date')  
+    date = request.GET.get('date')
     date = datetime.datetime.strptime(date, '%Y-%m-%d').date()
     
     # time slots
@@ -157,6 +173,7 @@ def get_available_slots(request):
     available_slots = [slot for slot in slots if slot not in booked_slots]
 
     return JsonResponse({'available_slots': available_slots})
+
 
 class ReservationCancelView(LoginRequiredMixin, View):
     def post(self, request, pk):
@@ -193,6 +210,7 @@ class AdminReservationListView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['is_superuser'] = self.request.user.is_superuser
         return context
+
 
 @csrf_exempt
 @login_required

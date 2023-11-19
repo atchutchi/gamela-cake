@@ -14,7 +14,15 @@ class ReservationForm(forms.ModelForm):
 
 
 class ContactForm(forms.Form):
-    name = forms.CharField()
-    email = forms.EmailField()
-    phone = forms.CharField()
-    message = forms.CharField(widget=forms.Textarea)
+    name = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'Name'})
+        )
+    email = forms.EmailField(
+        widget=forms.TextInput(attrs={'placeholder': 'Email'})
+        )
+    phone = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'Phone'})
+        )
+    message = forms.CharField(
+        widget=forms.Textarea(attrs={'placeholder': 'Message'})
+        )
