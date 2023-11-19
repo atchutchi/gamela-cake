@@ -51,18 +51,35 @@
             </div>
             <form method="post" id="contactForm">
                 {% csrf_token %}
-                <div class="row align-items-stretch mb-5">
-                    <!-- ... campos do formulário ... -->
-                    {{ form.name|as_crispy_field }}
-                    {{ form.email|as_crispy_field }}
-                    {{ form.phone|as_crispy_field }}
-                    {{ form.message|as_crispy_field }}
-                    <!-- ... -->
+                    <div class="row align-items-stretch mb-5">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <!-- Name input-->
+                                {{ form.name|as_crispy_field }}
+                            </div>
+                            <div class="form-group">
+                                <!-- Email address input-->
+                                {{ form.email|as_crispy_field }}
+                            </div>
+                            <div class="form-group mb-md-0">
+                                <!-- Phone number input-->
+                                {{ form.phone|as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-group-textarea mb-md-0">
+                                <!-- Message input-->
+                                {{ form.message|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                <div class="text-center">
+                    <button class="btn btn-primary btn-xl text-uppercase" type="submit">Send Message</button>
                 </div>
-                <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase" type="submit">Send Message</button></div>
             </form>            
         </div>
     </section>
+
 
 
 {% endblock %}
