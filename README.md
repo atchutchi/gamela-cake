@@ -1,32 +1,55 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Gamela Cake
 
-Welcome,
+## Overview
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **March 14, 2023**
+[Here is the live version of the project]()
 
-## Reminders
+## Usage
 
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
+## Features
 
-## Creating the Heroku app
+### Existing Features
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+## Data Model
 
-1. `heroku/python`
-2. `heroku/nodejs`
+## Future Improvements
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+## Testing
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+### Testing Steps
 
-Connect your GitHub repository and deploy as normal.
+### Testing Bug
 
-## Constraints
+### Remaining Bugs
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+### Validator Testing
+**PEP8CI**
+**jshint**
 
----
+## Deployment
 
-Happy coding!
+### Deployment Bugs
+
+## Credits
+
+### Content
+
+### Media
+- Screenshot of the responsive where taken from [ui.dev]().
+- DALL·E for image generated
+
+### Language Used
+- TECHNOLOGIES: HTML5, CSS3, JAVASCRIPT, PYTHON
+- FRAMEWORKS: DJANGO, JQUERY, BOOTSTRAP
+- VERSION CONTROL: GIT, GITHUB
+- DATABASES: POSTGRES
+
+### Codes
+- Multi-line Docstrings from [Python Docstrings](https://www.geeksforgeeks.org/python-docstrings/)
+- Cloudinary
+
+### Deployment
+- Code Institute for the deployment terminar
+
+### Mentor
+- [Can Sücüllü](https://github.com/cansucullu) were consulted during the development process.
