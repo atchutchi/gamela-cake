@@ -2,7 +2,7 @@
 from django.urls import path, include
 from . import views
 from django.contrib.auth.views import LoginView
-from .views import SignUpView
+from .views import SignUpView, OrderReviewView
 from booking.views import (
     HomeView,
     UserListView,
@@ -31,4 +31,5 @@ urlpatterns = [
     path('admin/reservations/', views.AdminReservationListView.as_view(), name='admin_reservations'),
     path('reserve_cake/', views.reserve_cake, name='reserve_cake'),
     path('contact/', views.contact, name='contact'),
+    path('order/review/<int:order_id>/', OrderReviewView.as_view(), name='order_review'),
 ]

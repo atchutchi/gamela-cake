@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-section">
+    <div class="container">
+        <h2 class="text-center">Review Your Order</h2>
+        <div class="order-details">
+            <!-- Loop through order items and display them -->
+            {% for item in order.cake_set.all %}
+                <div class="order-item">
+                    <h5>{{ item.name }}</h5>
+                    <p>Quantity: {{ item.quantity }}</p>
+                    <p>Price: {{ item.price }}</p>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="text-center">
+            <a href="{% url 'confirm_order' order.id %}" class="btn btn-primary">Confirm Order</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

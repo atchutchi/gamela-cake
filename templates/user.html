@@ -20,6 +20,8 @@
                             <a href="{% url 'reservation_edit' reservation.id %}" class="list-group-item list-group-item-action">
                                 {{ reservation.datetime|date:"d M Y H:i" }} - {{ reservation.cake.name }}
                             </a>
+                            <!-- Link to Review Order Page -->
+                            <a href="{% url 'order_review' reservation.order.id %}" class="btn btn-primary mt-2">Review Order</a>
                         {% empty %}
                             <p class="text-muted">No upcoming reservations.</p>
                         {% endfor %}

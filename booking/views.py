@@ -10,7 +10,7 @@ from django.views import generic
 from django.urls import reverse_lazy
 from django.http import JsonResponse
 import json
-from .models import Reservation, Cake, ContactMessage
+from .models import Reservation, Cake, ContactMessage, Order
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
@@ -123,10 +123,17 @@ class ReservationCreateView(LoginRequiredMixin, CreateView):
         reservation.user = self.request.user
         reservation.save()
 
+        # create a request
+        Order.objects.create(
+            reservation=reservation,
+            cake=reservation.cake,
+            quantity=1
+        )
+
         # Add a success message
         messages.success(self.request, 'Your reservation has been successfully made.')
         return super().form_valid(form)
-    
+  
     def get_initial(self):
         # Get initial data for the form
         initial = super().get_initial()
@@ -255,3 +262,14 @@ def contact(request):
     else:
         form = ContactForm()
     return render(request, 'contact.html', {'form': form})
+
+
+class OrderReviewView(LoginRequiredMixin, TemplateView):
+    template_name = 'review_order.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        order_id = self.kwargs.get('order_id')
+        order = get_object_or_404(Order, id=order_id)
+        context['order'] = order
+        return context
