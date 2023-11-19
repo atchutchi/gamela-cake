@@ -7,6 +7,7 @@ from cloudinary.models import CloudinaryField
 from django.core.exceptions import ValidationError
 from django.db.models import Q
 
+
 # Custom User model extending the default Django User
 class User(models.Model):
     username = models.CharField(max_length=150, unique=True)
@@ -95,3 +96,12 @@ class Order(models.Model):
     def __str__(self):
         return f"Order {self.id} for {self.reservation}"
 
+class ContactMessage(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Message from {self.name}"

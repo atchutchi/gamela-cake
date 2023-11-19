@@ -7,18 +7,20 @@ from django.views import generic
 from django.urls import reverse_lazy
 from django.http import JsonResponse
 import json
-from .models import Reservation, Cake
+from .models import Reservation, Cake, ContactMessage
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.core.exceptions import ValidationError
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404, render
 from datetime import datetime, timedelta
 from django.utils import timezone
 from django.contrib import messages
 from django.core.mail import send_mail
 from .forms import ReservationForm
 from django.views.decorators.csrf import csrf_exempt
+from .forms import ContactForm
+
 
 class HomeView(TemplateView):
     template_name = 'index.html'
@@ -221,4 +223,15 @@ def reserve_cake(request):
             print(f"Error in reserve_cake: {e}")
             return JsonResponse({'success': False, 'error': str(e)})
     return JsonResponse({'success': False})
-    
+
+
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            ContactMessage.objects.create(**form.cleaned_data)
+            # Redirect or show success message
+            return redirect('success_url')
+    else:
+        form = ContactForm()
+    return render(request, 'contact.html', {'form': form})
