@@ -17,7 +17,7 @@ from django.shortcuts import redirect, get_object_or_404, render
 from django.utils import timezone
 from django.contrib import messages
 from django.core.mail import send_mail
-from .forms import ContactForm
+from .forms import ContactForm, ReservationForm
 
 # HomeView - Display the homepage
 class HomeView(TemplateView):
@@ -144,3 +144,10 @@ class UserView(LoginRequiredMixin, TemplateView):
         context['upcoming_reservations'] = Reservation.objects.filter(user=user, datetime__gte=timezone.now()).order_by('datetime')
         context['past_reservations'] = Reservation.objects.filter(user=user, datetime__lt=timezone.now()).order_by('-datetime')
         return context
+
+
+class ReservationCreateView(CreateView):
+    model = Reservation
+    form_class = ReservationForm
+    template_name = 'reservation_form.html'
+    success_url = '/some-success-url/'
