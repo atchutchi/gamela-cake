@@ -1,23 +1,36 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
-    <h2 class="section-heading text-uppercase">Make a Reservation</h2>
-    <form method="post">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="id_cake">Cake:</label>
-            {{ form.cake }}
+<!-- Reservation Section -->
+<section class="page-section" id="reservation">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Make a Reservation</h2>
+            <h3 class="section-subheading text-muted">Book your cake for any special occasion.</h3>
         </div>
-        <div class="form-group">
-            <label for="id_datetime">Date and Time:</label>
-            {{ form.datetime }}
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form method="post" id="reservationForm" class="form-horizontal">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="{{ form.cake.id_for_label }}" class="control-label">Cake:</label>
+                        {{ form.cake }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.datetime.id_for_label }}" class="control-label">Date and Time:</label>
+                        {{ form.datetime }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.time.id_for_label }}" class="control-label">Time:</label>
+                        {{ form.time }}
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Submit Reservation</button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="id_time">Time:</label>
-            {{ form.time }}
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</div>
+    </div>
+</section>
 {% endblock %}

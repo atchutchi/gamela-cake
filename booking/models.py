@@ -54,6 +54,7 @@ class Reservation(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     cake = models.ForeignKey(Cake, on_delete=models.CASCADE)
     datetime = models.DateTimeField(default=timezone.now)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"Reservation for {self.cake.name} by {self.user.username}"

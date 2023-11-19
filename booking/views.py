@@ -151,3 +151,7 @@ class ReservationCreateView(CreateView):
     form_class = ReservationForm
     template_name = 'reservation_form.html'
     success_url = '/some-success-url/'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
