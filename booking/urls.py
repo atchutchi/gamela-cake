@@ -1,7 +1,7 @@
 from django.urls import path, include
 from . import views
 from django.contrib.auth.views import LoginView
-from .views import SignUpView, CakeListView, OrderCreateView, OrderListView, OrderDetailView, OrderDeleteView, contact, MakeReservationView, UserReservationListView
+from .views import SignUpView, CakeListView, OrderCreateView, OrderListView, OrderDetailView, OrderDeleteView, contact, MakeReservationView, UserReservationListView, ReservationCreateView
 
 urlpatterns = [
     path('', views.HomeView.as_view(), name='home'),
@@ -17,4 +17,5 @@ urlpatterns = [
     path('reserve/<int:cake_id>/', MakeReservationView.as_view(), name='make_reservation'),
     path('reservations/', UserReservationListView.as_view(), name='reservations'),
     path('users/', views.UserView.as_view(), name='user'),
+    path('reservations/create/<int:cake_id>/', ReservationCreateView.as_view(), name='reservation_create'),
 ]

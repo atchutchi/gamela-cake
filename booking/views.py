@@ -30,13 +30,13 @@ class HomeView(TemplateView):
         context['form'] = ContactForm()
         return context
 
-
+# SignUpView - Handle user registration
 class SignUpView(generic.CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'registration/signup.html'
 
-
+# CakeListView - Display a list of cakes
 class CakeListView(ListView):
     model = Cake
     context_object_name = 'cakes'
@@ -56,7 +56,7 @@ class CakeListView(ListView):
 
         return queryset
 
-
+# OrderCreateView - Handle creation of new orders
 class OrderCreateView(LoginRequiredMixin, CreateView):
     model = Order
     fields = ['cake', 'quantity', 'special_request']
@@ -70,7 +70,7 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
         messages.success(self.request, 'Your order has been successfully made.')
         return super().form_valid(form)
 
-
+# OrderListView - Display a list of user's orders
 class OrderListView(LoginRequiredMixin, ListView):
     model = Order
     template_name = 'order_list.html'
@@ -78,18 +78,18 @@ class OrderListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user)
 
-
+# OrderDetailView - Display details of a specific order
 class OrderDetailView(LoginRequiredMixin, DetailView):
     model = Order
     template_name = 'order_detail.html'
 
-
+# OrderDeleteView - Handle deletion of orders
 class OrderDeleteView(LoginRequiredMixin, DeleteView):
     model = Order
     template_name = 'order_confirm_delete.html'
     success_url = reverse_lazy('order_list')
 
-
+# contact - Handle contact form submissions
 def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
@@ -100,7 +100,7 @@ def contact(request):
         form = ContactForm()
     return render(request, 'contact.html', {'form': form})
 
-
+# MakeReservationView - Handle creation of new reservations
 class MakeReservationView(LoginRequiredMixin, View):
     def post(self, request, cake_id):
         cake = get_object_or_404(Cake, pk=cake_id)
@@ -113,7 +113,7 @@ class MakeReservationView(LoginRequiredMixin, View):
             datetime=timezone.now()
         )
 
-        # send email confirmation
+        # Send email confirmation
         send_mail(
             'Confirmação de Reserva',
             'Sua reserva foi realizada com sucesso.',
@@ -125,16 +125,16 @@ class MakeReservationView(LoginRequiredMixin, View):
         messages.success(request, 'Reserva realizada com sucesso.')
         return redirect('reservations')
 
-
+# UserReservationListView - Display a list of user's reservations
 class UserReservationListView(LoginRequiredMixin, ListView):
     model = Reservation
-    template_name = 'reservation.html'
+    template_name = 'reservations.html'
     context_object_name = 'reservations'
 
     def get_queryset(self):
         return Reservation.objects.filter(user=self.request.user).order_by('-datetime')
 
-
+# UserView - Display user profile and reservations
 class UserView(LoginRequiredMixin, TemplateView):
     template_name = 'user.html'
 
