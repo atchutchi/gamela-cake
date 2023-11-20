@@ -150,7 +150,7 @@ class ReservationCreateView(CreateView):
     model = Reservation
     form_class = ReservationForm
     template_name = 'reservation_form.html'
-    success_url = '/some-success-url/'
+    success_url = reverse_lazy('reservations')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
