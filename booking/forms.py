@@ -23,5 +23,10 @@ class ReservationForm(forms.ModelForm):
         model = Reservation
         fields = ['cake', 'datetime']
         widgets = {
-            'datetime': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'cake': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Select Your Cake'}),
+            'datetime': forms.DateTimeInput(attrs={'class': 'form-control', 'placeholder': 'Pick a Date and Time', 'type': 'datetime-local'}),
+        }
+        labels = {
+            'cake': False,
+            'datetime': False,
         }
