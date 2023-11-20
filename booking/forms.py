@@ -37,7 +37,7 @@ class ReservationForm(forms.ModelForm):
                 }
             ),
         }
-        
+    
         labels = {
             'cake': '',
             'datetime': '',
