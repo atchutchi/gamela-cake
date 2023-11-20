@@ -1,7 +1,7 @@
 # Gamela Cake
 
 ## Overview
-
+Welcome to Gamela Cake, an innovative cake reservation management platform that seamlessly integrates user-friendly features with sophisticated cake selection and booking systems. Designed to provide an effortless and enjoyable cake ordering experience, our platform offers a range of functionalities tailored to both casual browsers and serious confectionery enthusiasts.
 [Here is the live version of the project]()
 
 ## Usage
