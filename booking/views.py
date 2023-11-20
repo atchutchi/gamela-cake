@@ -171,7 +171,10 @@ class ReservationCreateView(CreateView):
     success_url = reverse_lazy('reservations')
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
+        reservation = form.save(commit=False)
+        reservation.user = self.request.user
+        reservation.save()
+        messages.success(self.request, "Reservation successfully created!")
         return super().form_valid(form)
 
 
