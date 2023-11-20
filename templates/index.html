@@ -9,8 +9,13 @@
         <div class="container">
             <div class="masthead-subheading">Welcome to Cake Booking</div>
             <div class="masthead-heading text-uppercase">Order Delicious Cakes for Any Occasion</div>
-            <a href="{% url 'reservations' %}" class="btn btn-primary btn-xl text-uppercase">Make Reservation</a>
-            <a href="{% url 'cake' %}" class="btn btn-outline-light btn-xl text-uppercase">View Cakes</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'reservations' %}" class="btn btn-primary btn-xl text-uppercase">Make Reservation</a>
+                <a href="{% url 'cake' %}" class="btn btn-outline-light btn-xl text-uppercase">View Cakes</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-primary btn-xl text-uppercase">Login to Make Reservation</a>
+                <a href="{% url 'login' %}" class="btn btn-outline-light btn-xl text-uppercase">Login to View Cakes</a>
+            {% endif %}
         </div>
     </header>
 
