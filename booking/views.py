@@ -1,5 +1,5 @@
 from django.views.generic import (
-    TemplateView, ListView, CreateView, 
+    TemplateView, ListView, CreateView,
     UpdateView, DeleteView, DetailView
 )
 from django.views import View
@@ -19,6 +19,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from .forms import ContactForm, ReservationForm
 
+
 # HomeView - Display the homepage
 class HomeView(TemplateView):
     template_name = 'index.html'
@@ -30,11 +31,13 @@ class HomeView(TemplateView):
         context['form'] = ContactForm()
         return context
 
+
 # SignUpView - Handle user registration
 class SignUpView(generic.CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'registration/signup.html'
+
 
 # CakeListView - Display a list of cakes
 class CakeListView(ListView):
@@ -56,6 +59,7 @@ class CakeListView(ListView):
 
         return queryset
 
+
 # OrderCreateView - Handle creation of new orders
 class OrderCreateView(LoginRequiredMixin, CreateView):
     model = Order
@@ -67,7 +71,10 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
         order = form.save(commit=False)
         order.user = self.request.user
         order.save()
-        messages.success(self.request, 'Your order has been successfully made.')
+        messages.success(
+            self.request,
+            'Your order has been successfully made.'
+            )
         return super().form_valid(form)
 
 # OrderListView - Display a list of user's orders
@@ -168,13 +175,16 @@ class ReservationDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'reservation_confirm_delete.html'
     success_url = reverse_lazy('reservations')
 
-    def delete(self, request, *args, **kwargs):
+    def delete(self, form, request, *args, **kwargs):
         reservation = self.get_object()
         if reservation.can_cancel():
-            messages.success(request, "Reservation successfully cancelled.")
+            messages.success(self.request, "Reservation successfully cancelled.")
             return super().delete(request, *args, **kwargs)
         else:
-            messages.error(request, "It's not possible to cancel the reservation less than 24 hours in advance.")
+            messages.error(
+                self.request, 
+                "It's not possible to cancel the reservation less than 24 hours in advance."
+                )
             return HttpResponseRedirect(reverse('reservations'))
 
 
@@ -191,7 +201,10 @@ class ReservationEditView(LoginRequiredMixin, UpdateView):
             messages.success(self.request, "Reservation successfully updated.")
             return super().form_valid(form)
         else:
-            messages.error(self.request, "Reservations can only be edited more than 24 hours in advance.")
+            messages.error(
+                self.request, 
+                "Reservations can only be edited more than 24 hours in advance."
+                )
             return HttpResponseRedirect(reverse('reservations'))
 
     def get_queryset(self):
