@@ -32,9 +32,6 @@ class Cake(models.Model):
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     cake = models.ForeignKey(Cake, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=1)
-    created_at = models.DateTimeField(auto_now_add=True)
-    special_request = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return f"Order {self.id} for {self.user.username}"
@@ -56,9 +53,10 @@ class Reservation(models.Model):
     cake = models.ForeignKey(Cake, on_delete=models.CASCADE)
     datetime = models.DateTimeField(default=timezone.now)
     created_at = models.DateTimeField(auto_now_add=True)
+    order = models.OneToOneField(Order, on_delete=models.SET_NULL, null=True, blank=True, related_name='reservation')
 
     def __str__(self):
         return f"Reservation for {self.cake.name} by {self.user.username}"
-    
+
     def can_cancel(self):
         return timezone.now() <= self.datetime - timedelta(hours=24)

@@ -81,7 +81,11 @@ class OrderListView(LoginRequiredMixin, ListView):
 # OrderDetailView - Display details of a specific order
 class OrderDetailView(LoginRequiredMixin, DetailView):
     model = Order
-    template_name = 'order_detail.html'
+    template_name = 'review_order.html'
+
+    def get_queryset(self):
+        # Ensures that users can only access their own orders
+        return Order.objects.filter(reservation__user=self.request.user)
 
 # OrderDeleteView - Handle deletion of orders
 class OrderDeleteView(LoginRequiredMixin, DeleteView):
