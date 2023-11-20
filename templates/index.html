@@ -49,7 +49,7 @@
                 <h2 class="section-heading text-uppercase">Contact Us</h2>
                 <h3 class="section-subheading text-muted">For more information, please do not hesitate to get in touch with us.</h3>
             </div>
-            <form method="post" id="contactForm">
+            <form method="post" id="contactForm" action="{% url 'contact' %}">
                 {% csrf_token %}
                     <div class="row align-items-stretch mb-5">
                         <div class="col-md-6">

@@ -31,13 +31,11 @@ class HomeView(TemplateView):
         context['form'] = ContactForm()
         return context
 
-
 # SignUpView - Handle user registration
 class SignUpView(generic.CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'registration/signup.html'
-
 
 # CakeListView - Display a list of cakes
 class CakeListView(ListView):
@@ -106,7 +104,7 @@ def contact(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             ContactMessage.objects.create(**form.cleaned_data)
-            return redirect('success_url')
+            return redirect('home')
     else:
         form = ContactForm()
     return render(request, 'contact.html', {'form': form})
@@ -122,6 +120,13 @@ class MakeReservationView(LoginRequiredMixin, View):
             user=user,
             cake=cake,
             datetime=timezone.now()
+        )
+
+        # Create a corresponding order
+        order = Order.objects.create(
+            user=user,
+            cake=cake,
+            reservation=reservation
         )
 
         # Send email confirmation

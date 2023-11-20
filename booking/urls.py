@@ -39,7 +39,7 @@ urlpatterns = [
         name='order_delete'),
 
     # Contact page
-    path('contact/', contact, name='contact'),
+    path('contact/', views.contact, name='contact'),
 
     # Reserve a specific cake
     path('reserve/<int:cake_id>/', MakeReservationView.as_view(), 
