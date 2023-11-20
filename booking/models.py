@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.conf import settings
 from cloudinary.models import CloudinaryField
+from datetime import timedelta
 
 
 # Custom User model extending the default Django User
@@ -58,3 +59,6 @@ class Reservation(models.Model):
 
     def __str__(self):
         return f"Reservation for {self.cake.name} by {self.user.username}"
+    
+    def can_cancel(self):
+        return timezone.now() <= self.datetime - timedelta(hours=24)

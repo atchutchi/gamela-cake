@@ -1,6 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+    <!-- Display Messages -->
+    {% if messages %}
+        <div class="container mt-4">
+            {% for message in messages %}
+                <div class="alert {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     <!-- Reservations Section -->
     <section class="page-section">
         <div class="container mt-4">

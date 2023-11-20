@@ -155,3 +155,24 @@ class ReservationCreateView(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+
+class ReservationDeleteView(LoginRequiredMixin, DeleteView):
+    model = Reservation
+    template_name = 'reservation_confirm_delete.html'
+    success_url = reverse_lazy('reservations')
+
+    def get_queryset(self):
+        return Reservation.objects.filter(user=self.request.user)
+
+
+class ReservationCancelView(LoginRequiredMixin, View):
+    def post(self, request, pk):
+        reservation = get_object_or_404(Reservation, pk=pk, user=request.user)
+        if reservation.can_cancel():
+            # Logic to cancel the reservation
+            messages.success(request, "Reservation successfully cancelled.")
+        else:
+            messages.error(request, "It's not possible to cancel the reservation less than 24 hours in advance.")
+        
+        return HttpResponseRedirect(reverse('reservations'))
