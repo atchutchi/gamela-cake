@@ -63,4 +63,7 @@ urlpatterns = [
     # Edit an existing reservation
     path('reservations/edit/<int:pk>/', 
         views.ReservationEditView.as_view(), name='reservation_edit'),
+
+    # Create a new reservation in reservations.html
+    path('reservations/new/', ReservationCreateView.as_view(), name='new_reservation'),
 ]

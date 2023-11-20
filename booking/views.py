@@ -61,7 +61,7 @@ class CakeListView(ListView):
 # OrderCreateView - Handle creation of new orders
 class OrderCreateView(LoginRequiredMixin, CreateView):
     model = Order
-    fields = ['cake', 'quantity', 'special_request']
+    fields = ['cake', 'user']
     template_name = 'order_form.html'
     success_url = reverse_lazy('order_list')
 
