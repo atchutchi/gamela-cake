@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 <section class="page-section">
@@ -8,13 +9,24 @@
             <h3 class="section-subheading text-muted">Modify your cake reservation details</h3>
         </div>
 
-        <form method="post" class="form-reservation-edit">
+        <form method="post" id="reservationEditForm" class="reservation-form">
             {% csrf_token %}
             <div class="row justify-content-center">
-                {{ form.as_p }}
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="{{ form.cake.id_for_label }}" class="control-label">Select Your Cake:</label>
+                        {{ form.cake|as_crispy_field }}
+                        <small class="form-text text-muted">Choose a different cake for your event if needed.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.datetime.id_for_label }}" class="control-label">Change Date and Time:</label>
+                        {{ form.datetime|as_crispy_field }}
+                        <small class="form-text text-muted">Adjust the date and time for your reservation.</small>
+                    </div>
+                </div>
             </div>
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary btn-xl text-uppercase">Update</button>
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary btn-lg">Update Reservation</button>
             </div>
         </form>
     </div>

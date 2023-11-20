@@ -39,6 +39,6 @@ class ReservationForm(forms.ModelForm):
         }
         
         labels = {
-            'cake': False,
-            'datetime': False,
+            'cake': '',
+            'datetime': '',
         }
