@@ -136,11 +136,16 @@ function getCookie(name) {
     return cookieValue;
 }
 
+// Continuously checks for new messages and hides them after 2 seconds
+function hideMessages() {
+    const alerts = document.querySelectorAll('.alert:not(.hide-processed)');
+    alerts.forEach(alert => {
+        setTimeout(() => {
+            alert.style.display = 'none';
+        }, 2000); // 2000 milliseconds = 2 seconds
+        alert.classList.add('hide-processed');
+    });
+}
 
-// Auto-hide alert messages after 2 seconds
-window.addEventListener('DOMContentLoaded', (event) => {
-    setTimeout(() => {
-        const alerts = document.querySelectorAll('.alert');
-        alerts.forEach(alert => alert.style.display = 'none');
-    }, 2000);  // 2000 milliseconds = 2 seconds
-});
+// Execute the hideMessages function every 500 milliseconds
+setInterval(hideMessages, 500);
