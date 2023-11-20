@@ -135,3 +135,12 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
+
+// Auto-hide alert messages after 2 seconds
+window.addEventListener('DOMContentLoaded', (event) => {
+    setTimeout(() => {
+        const alerts = document.querySelectorAll('.alert');
+        alerts.forEach(alert => alert.style.display = 'none');
+    }, 2000);  // 2000 milliseconds = 2 seconds
+});

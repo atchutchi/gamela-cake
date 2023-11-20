@@ -19,5 +19,6 @@ urlpatterns = [
     path('users/', views.UserView.as_view(), name='user'),
     path('reservations/create/<int:cake_id>/', ReservationCreateView.as_view(), name='reservation_create'),
     path('reservations/delete/<int:pk>/', views.ReservationDeleteView.as_view(), name='reservation_delete'),
-    path('reservations/cancel/<int:pk>/', views.ReservationCancelView.as_view(), name='reservation_cancel'),
+    path('reservations/edit/<int:pk>/', views.ReservationEditView.as_view(), name='reservation_edit'),
+
 ]

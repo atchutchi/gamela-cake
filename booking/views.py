@@ -7,8 +7,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.views import generic
-from django.urls import reverse_lazy
-from django.http import JsonResponse
+from django.urls import reverse_lazy, reverse
+from django.http import JsonResponse, HttpResponseRedirect
 import json
 from .models import Cake, ContactMessage, Order, Reservation
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -115,14 +115,16 @@ class MakeReservationView(LoginRequiredMixin, View):
 
         # Send email confirmation
         send_mail(
-            'Confirmação de Reserva',
-            'Sua reserva foi realizada com sucesso.',
-            'from@example.com',
-            [user.email],
-            fail_silently=False,
+            'Booking Confirmation',
+             'Your reservation was successful.',
+             'ferreira.atchutchi@gmail.com',
+             [user.email],
+             fail_silently=False,
         )
 
-        messages.success(request, 'Reserva realizada com sucesso.')
+        # Add succss message
+        messages.success(request, 'Cake booked successfully!')
+
         return redirect('reservations')
 
 # UserReservationListView - Display a list of user's reservations
@@ -162,17 +164,31 @@ class ReservationDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'reservation_confirm_delete.html'
     success_url = reverse_lazy('reservations')
 
-    def get_queryset(self):
-        return Reservation.objects.filter(user=self.request.user)
-
-
-class ReservationCancelView(LoginRequiredMixin, View):
-    def post(self, request, pk):
-        reservation = get_object_or_404(Reservation, pk=pk, user=request.user)
+    def delete(self, request, *args, **kwargs):
+        reservation = self.get_object()
         if reservation.can_cancel():
-            # Logic to cancel the reservation
             messages.success(request, "Reservation successfully cancelled.")
+            return super().delete(request, *args, **kwargs)
         else:
             messages.error(request, "It's not possible to cancel the reservation less than 24 hours in advance.")
-        
-        return HttpResponseRedirect(reverse('reservations'))
+            return HttpResponseRedirect(reverse('reservations'))
+
+
+class ReservationEditView(LoginRequiredMixin, UpdateView):
+    model = Reservation
+    fields = ['cake', 'datetime']
+    template_name = 'reservation_edit.html'
+    success_url = reverse_lazy('reservations')
+
+    def form_valid(self, form):
+        reservation = form.save(commit=False)
+        if reservation.can_cancel():
+            reservation.save()
+            messages.success(self.request, "Reservation successfully updated.")
+            return super().form_valid(form)
+        else:
+            messages.error(self.request, "Reservations can only be edited more than 24 hours in advance.")
+            return HttpResponseRedirect(reverse('reservations'))
+
+    def get_queryset(self):
+        return Reservation.objects.filter(user=self.request.user)
