@@ -37,8 +37,8 @@
                         <td>{{ reservation.cake.price }}</td>
                         <td>{{ reservation.datetime|date:"d M Y H:i" }}</td>
                         <td>
+                            <a href="{% url 'reservation_edit' reservation.id %}" class="btn btn-warning btn-sm">Edit</a>
                             <a href="{% url 'reservation_delete' reservation.id %}" class="btn btn-danger btn-sm">Delete</a>
-                            </form>
                         </td>
                     </tr>
                     {% empty %}
