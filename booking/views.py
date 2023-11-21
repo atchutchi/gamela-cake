@@ -4,7 +4,8 @@ from django.views.generic import (
 )
 from django.views import View
 from django.contrib.auth.models import User
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate, login
+from django.contrib.auth.views import LoginView
 from django.views import generic
 from django.urls import reverse_lazy, reverse
 from django.http import JsonResponse, HttpResponseRedirect
@@ -29,6 +30,24 @@ class HomeView(TemplateView):
         context['cakes'] = featured_cakes
         context['form'] = ContactForm()
         return context
+
+# login
+class CustomLoginView(LoginView):
+    template_name = 'registration/login.html'
+
+    def form_valid(self, form):
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password')
+        user = authenticate(self.request, username=username, password=password)
+
+        if user is not None and user.is_active:
+            login(self.request, user)
+            messages.success(self.request, 'Login successful!')
+            return super().form_valid(form)
+        else:
+            messages.error(self.request, 'Invalid username or password.')
+            return self.form_invalid(form)
+
 
 # SignUpView - Handle user registration
 class SignUpView(generic.CreateView):

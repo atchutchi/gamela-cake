@@ -4,7 +4,8 @@ from django.contrib.auth.views import LoginView
 from .views import (
     SignUpView, CakeListView, OrderCreateView, OrderListView, 
     OrderDetailView, OrderDeleteView, contact, 
-    MakeReservationView, UserReservationListView, ReservationCreateView
+    MakeReservationView, UserReservationListView, ReservationCreateView, 
+    CustomLoginView
 )
 
 urlpatterns = [
@@ -12,8 +13,7 @@ urlpatterns = [
     path('', views.HomeView.as_view(), name='home'),
 
     # User login page
-    path('login/', LoginView.as_view(
-        template_name='registration/login.html'), name='login'),
+    path('login/', CustomLoginView.as_view(), name='login'),
 
     # User registration page
     path('signup/', SignUpView.as_view(), name='signup'),
