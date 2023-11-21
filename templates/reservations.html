@@ -39,8 +39,8 @@
                         <td>{{ reservation.cake.price }}</td>
                         <td>{{ reservation.datetime|date:"d M Y H:i" }}</td>
                         <td>
-                            <a href="{% url 'reservation_edit' reservation.id %}" class="btn btn-warning btn-sm">Edit</a>
-                            <a href="{% url 'reservation_delete' reservation.id %}" class="btn btn-danger btn-sm">Delete</a>
+                            <a href="{% url 'reservation_edit' reservation.id %}" class="btn btn-warning mb-3 btn-sm">Edit</a>
+                            <a href="{% url 'reservation_delete' reservation.id %}" class="btn btn-danger mb-3 btn-sm">Delete</a>
                              <!-- Link to Review Order if it exists -->
                              {% if reservation.order %}
                                 <a href="{% url 'order_review' reservation.order.id %}" class="btn btn-primary btn-sm">Review Order</a>
