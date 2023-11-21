@@ -4,6 +4,7 @@ from django.conf import settings
 from cloudinary.models import CloudinaryField
 from datetime import timedelta
 
+
 # Stores user authentication and profile information.
 class User(models.Model):
     username = models.CharField(max_length=150, unique=True)
@@ -16,6 +17,7 @@ class User(models.Model):
     def __str__(self):
         return self.username
 
+
 # Represents a cake available for reservation or purchase.
 class Cake(models.Model):
     name = models.CharField(max_length=255)
@@ -26,19 +28,21 @@ class Cake(models.Model):
     def __str__(self):
         return self.name
 
+
 # Represents an order made by a user. Associates the user with a specific cake.
 class Order(models.Model):
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, 
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE
     )
     cake = models.ForeignKey(
-        Cake, 
+        Cake,
         on_delete=models.CASCADE
     )
 
     def __str__(self):
         return f"Order {self.id} for {self.user.username}"
+
 
 # Used to store contact messages sent by users through the website.
 class ContactMessage(models.Model):
@@ -51,23 +55,24 @@ class ContactMessage(models.Model):
     def __str__(self):
         return f"Message from {self.name}"
 
+
 # Represents a cake reservation made by a user. Stores details
 class Reservation(models.Model):
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, 
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE
     )
     cake = models.ForeignKey(
-        Cake, 
+        Cake,
         on_delete=models.CASCADE
     )
     datetime = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     order = models.OneToOneField(
-        Order, 
-        on_delete=models.SET_NULL, 
-        null=True, 
-        blank=True, 
+        Order,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
         related_name='reservation'
     )
 

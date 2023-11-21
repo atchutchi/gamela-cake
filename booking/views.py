@@ -31,6 +31,7 @@ class HomeView(TemplateView):
         context['form'] = ContactForm()
         return context
 
+
 # login
 class CustomLoginView(LoginView):
     template_name = 'registration/login.html'
@@ -54,6 +55,7 @@ class SignUpView(generic.CreateView):
     form_class = SignUpForm
     success_url = reverse_lazy('login')
     template_name = 'registration/signup.html'
+
 
 # CakeListView - Display a list of cakes
 class CakeListView(ListView):
@@ -93,6 +95,7 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
             )
         return super().form_valid(form)
 
+
 # OrderListView - Display a list of user's orders
 class OrderListView(LoginRequiredMixin, ListView):
     model = Order
@@ -100,6 +103,7 @@ class OrderListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user)
+
 
 # OrderDetailView - Display details of a specific order
 class OrderDetailView(LoginRequiredMixin, DetailView):
@@ -110,11 +114,13 @@ class OrderDetailView(LoginRequiredMixin, DetailView):
         # Ensures that users can only access their own orders
         return Order.objects.filter(reservation__user=self.request.user)
 
+
 # OrderDeleteView - Handle deletion of orders
 class OrderDeleteView(LoginRequiredMixin, DeleteView):
     model = Order
     template_name = 'order_confirm_delete.html'
     success_url = reverse_lazy('order_list')
+
 
 # contact - Handle contact form submissions
 def contact(request):
@@ -126,6 +132,7 @@ def contact(request):
     else:
         form = ContactForm()
     return render(request, 'contact.html', {'form': form})
+
 
 # MakeReservationView - Handle creation of new reservations
 class MakeReservationView(LoginRequiredMixin, View):
@@ -150,16 +157,17 @@ class MakeReservationView(LoginRequiredMixin, View):
         # Send email confirmation
         send_mail(
             'Booking Confirmation',
-             'Your reservation was successful.',
-             'ferreira.atchutchi@gmail.com',
-             [user.email],
-             fail_silently=False,
+            'Your reservation was successful.',
+            'ferreira.atchutchi@gmail.com',
+            [user.email],
+            fail_silently=False,
         )
 
-        # Add succss message
+        # Add success message
         messages.success(request, 'Cake booked successfully!')
 
         return redirect('reservations')
+
 
 # UserReservationListView - Display a list of user's reservations
 class UserReservationListView(LoginRequiredMixin, ListView):
@@ -170,6 +178,7 @@ class UserReservationListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Reservation.objects.filter(user=self.request.user).order_by('-datetime')
 
+
 # UserView - Display user profile and reservations
 class UserView(LoginRequiredMixin, TemplateView):
     template_name = 'user.html'
@@ -177,8 +186,10 @@ class UserView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
-        context['upcoming_reservations'] = Reservation.objects.filter(user=user, datetime__gte=timezone.now()).order_by('datetime')
-        context['past_reservations'] = Reservation.objects.filter(user=user, datetime__lt=timezone.now()).order_by('-datetime')
+        context['upcoming_reservations'] = Reservation.objects.filter(
+            user=user, datetime__gte=timezone.now()).order_by('datetime')
+        context['past_reservations'] = Reservation.objects.filter(
+            user=user, datetime__lt=timezone.now()).order_by('-datetime')
         return context
 
 
@@ -208,7 +219,7 @@ class ReservationDeleteView(LoginRequiredMixin, DeleteView):
             return super().delete(request, *args, **kwargs)
         else:
             messages.error(
-                self.request, 
+                self.request,
                 "It's not possible to cancel the reservation less than 24 hours in advance."
                 )
             return HttpResponseRedirect(reverse('reservations'))
@@ -228,7 +239,7 @@ class ReservationEditView(LoginRequiredMixin, UpdateView):
             return super().form_valid(form)
         else:
             messages.error(
-                self.request, 
+                self.request,
                 "Reservations can only be edited more than 24 hours in advance."
                 )
             return HttpResponseRedirect(reverse('reservations'))
