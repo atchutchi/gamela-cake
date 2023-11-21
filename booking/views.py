@@ -5,7 +5,6 @@ from django.views.generic import (
 from django.views import View
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm
 from django.views import generic
 from django.urls import reverse_lazy, reverse
 from django.http import JsonResponse, HttpResponseRedirect
@@ -17,7 +16,7 @@ from django.shortcuts import redirect, get_object_or_404, render
 from django.utils import timezone
 from django.contrib import messages
 from django.core.mail import send_mail
-from .forms import ContactForm, ReservationForm
+from .forms import ContactForm, ReservationForm, SignUpForm
 
 
 # HomeView - Display the homepage
@@ -33,7 +32,7 @@ class HomeView(TemplateView):
 
 # SignUpView - Handle user registration
 class SignUpView(generic.CreateView):
-    form_class = UserCreationForm
+    form_class = SignUpForm
     success_url = reverse_lazy('login')
     template_name = 'registration/signup.html'
 
