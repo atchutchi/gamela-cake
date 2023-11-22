@@ -31,7 +31,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = ['8000-atchutchi-gamela-cake-4t3ldv5121.us2.codeanyapp.com',
-'localhost']
+'localhost', 'https://gamela-cake-5a01bc199f23.herokuapp.com'
+]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://8000-atchutchi-gamela-cake-4t3ldv5121.us2.codeanyapp.com',
@@ -46,11 +47,11 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
     'cloudinary_storage',
+    'django.contrib.staticfiles',
+    'cloudinary',
     'crispy_forms',
     'crispy_bootstrap4',
-    'cloudinary',
     'booking',
 ]
 
