@@ -4,7 +4,7 @@ from .views import (
     SignUpView, CakeListView, OrderCreateView, OrderListView,
     OrderDetailView, OrderDeleteView, contact,
     MakeReservationView, UserReservationListView, ReservationCreateView,
-    CustomLoginView
+    ReservationDetailView, CustomLoginView
 )
 
 urlpatterns = [
@@ -66,4 +66,8 @@ urlpatterns = [
     # Create a new reservation in reservations.html
     path('reservations/new/', ReservationCreateView.as_view(),
          name='new_reservation'),
+
+    # Details of a specific reservation
+    path('reservations/detail/<int:pk>/', ReservationDetailView.as_view(),
+        name='reservation_detail'),
 ]

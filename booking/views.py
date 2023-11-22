@@ -212,7 +212,7 @@ class ReservationDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'reservation_confirm_delete.html'
     success_url = reverse_lazy('reservations')
 
-    def delete(self, form, request, *args, **kwargs):
+    def delete(self, request, *args, **kwargs):
         reservation = self.get_object()
         if reservation.can_cancel():
             messages.success(self.request, "Reservation successfully cancelled.")
@@ -220,9 +220,13 @@ class ReservationDeleteView(LoginRequiredMixin, DeleteView):
         else:
             messages.error(
                 self.request,
-                "It's not possible to cancel the reservation less than 24 hours in advance."
-                )
-            return HttpResponseRedirect(reverse('reservations'))
+                "It's not possible to cancel the reservation less than 24h in advance."
+            )
+            return HttpResponseRedirect(reverse('reservation_detail', kwargs={'pk': reservation.pk}))
+
+    def get_queryset(self):
+        return Reservation.objects.filter(user=self.request.user)
+
 
 
 class ReservationEditView(LoginRequiredMixin, UpdateView):
@@ -245,4 +249,13 @@ class ReservationEditView(LoginRequiredMixin, UpdateView):
             return HttpResponseRedirect(reverse('reservations'))
 
     def get_queryset(self):
+        return Reservation.objects.filter(user=self.request.user)
+
+
+class ReservationDetailView(LoginRequiredMixin, DetailView):
+    model = Reservation
+    template_name = 'reservation_detail.html'
+
+    def get_queryset(self):
+        # users can only access their own reservations
         return Reservation.objects.filter(user=self.request.user)

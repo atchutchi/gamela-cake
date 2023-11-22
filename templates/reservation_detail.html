@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Reservation Details</h2>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Reservation for {{ object.cake.name }}</h5>
+            <p class="card-text">Date and Time: {{ object.datetime }}</p>
+            <p class="card-text">Created on: {{ object.created }}</p>
+            <a href="{% url 'reservations' %}" class="btn btn-primary">Back to Reservations</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
