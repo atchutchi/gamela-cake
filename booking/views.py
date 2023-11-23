@@ -2,6 +2,8 @@ from django.views.generic import (
     TemplateView, ListView, CreateView,
     UpdateView, DeleteView, DetailView
 )
+from django.views.generic.edit import FormView
+from django import forms
 from django.views import View
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model, authenticate, login
@@ -18,6 +20,7 @@ from django.utils import timezone
 from django.contrib import messages
 from django.core.mail import send_mail
 from .forms import ContactForm, ReservationForm, SignUpForm
+import logging
 
 
 # HomeView - Display the homepage
@@ -192,7 +195,7 @@ class UserView(LoginRequiredMixin, TemplateView):
             user=user, datetime__lt=timezone.now()).order_by('-datetime')
         return context
 
-
+# Create reservation
 class ReservationCreateView(CreateView):
     model = Reservation
     form_class = ReservationForm
@@ -207,28 +210,36 @@ class ReservationCreateView(CreateView):
         return super().form_valid(form)
 
 
-class ReservationDeleteView(LoginRequiredMixin, DeleteView):
-    model = Reservation
+class ReservationCancelForm(forms.Form):
+    """Formulário vazio, usado apenas para manter o padrão de FormView."""
+    pass
+
+
+# delete reservation
+class ReservationDeleteView(LoginRequiredMixin, FormView):
     template_name = 'reservation_confirm_delete.html'
+    form_class = ReservationCancelForm
     success_url = reverse_lazy('reservations')
 
-    def delete(self, request, *args, **kwargs):
-        reservation = self.get_object()
+    def form_valid(self, form):
+        reservation_id = self.kwargs.get('pk')
+        reservation = get_object_or_404(Reservation, pk=reservation_id, user=self.request.user)
+
         if reservation.can_cancel():
+            reservation.delete()
             messages.success(self.request, "Reservation successfully cancelled.")
-            return super().delete(request, *args, **kwargs)
         else:
-            messages.error(
-                self.request,
-                "It's not possible to cancel the reservation less than 24h in advance."
-            )
-            return HttpResponseRedirect(reverse('reservation_detail', kwargs={'pk': reservation.pk}))
+            messages.error(self.request, "It's not possible to cancel the reservation less than 24h in advance.")
 
-    def get_queryset(self):
-        return Reservation.objects.filter(user=self.request.user)
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['reservation'] = get_object_or_404(Reservation, pk=self.kwargs.get('pk'))
+        return context
 
 
-
+# edit reservation
 class ReservationEditView(LoginRequiredMixin, UpdateView):
     model = Reservation
     fields = ['cake', 'datetime']
