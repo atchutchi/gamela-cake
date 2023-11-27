@@ -16,7 +16,7 @@
                     <!-- Upcoming Reservations -->
                     <h4 class="text-uppercase mt-4">Upcoming Reservations</h4>
                     <div class="list-group">
-                        {% for reservation in upcoming_reservations %}
+                        {% for reservation in upcoming_reservations %}  
                             <a href="{% url 'reservation_edit' reservation.id %}" class="list-group-item list-group-item-action">
                                 {{ reservation.datetime|date:"d M Y H:i" }} - {{ reservation.cake.name }}
                             </a>
