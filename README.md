@@ -4,6 +4,8 @@
 Welcome to Gamela Cake, an innovative cake reservation management platform that seamlessly integrates user-friendly features with sophisticated cake selection and booking systems. Designed to provide an effortless and enjoyable cake ordering experience, our platform offers a range of functionalities tailored to both casual browsers and serious confectionery enthusiasts.
 [Here is the live version of the project](https://gamela-cake-5a01bc199f23.herokuapp.com/)
 
+![Gamela Cake Resposive](./static/assets/img/readme/mockup_website.png)
+
 ## User Story
 Based on the objective of my website, I created this user story
 
@@ -236,12 +238,23 @@ As a **customer** I can ** receive reminders of my upcoming reservation,** so th
 ### Content
 
 ### Media
-- Screenshot of the responsive where taken from [ui.dev]().
+- Screenshot of the responsive where taken from [ui.dev](https://ui.dev/amiresponsive?url=https://gamela-cake-5a01bc199f23.herokuapp.com/reservations/).
 - DALL·E for image generated
 - Adobe Photoshop to create Gamela Cake logo
 
 ### Language Used
-- TECHNOLOGIES: HTML5, CSS3, JAVASCRIPT, PYTHON
+- TECHNOLOGIES: 
+    - HTML5: To build the main structure of the site
+    - CSS3:  To style the website with bootstrap
+    - JAVASCRIPT: For the frontend interactivity
+        - Shrink and Collapse the navbar when the page is scrolled
+        - Setup for the confirmation modal
+        - Flatpickr setup for date and time selection
+        - For date selection
+        - To handle reservation confirmation
+        - To get a cookie value by name
+        - To checks for new messages and hides them after 2 seconds
+    - PYTHON: To build the backend with django
 - FRAMEWORKS: DJANGO, JQUERY, BOOTSTRAP
 - VERSION CONTROL: GIT, GITHUB
 
@@ -257,7 +270,7 @@ As a **customer** I can ** receive reminders of my upcoming reservation,** so th
 
 ### Deployment
 - Use Code Institute [Django Deployment Instructions](https://docs.google.com/document/d/1P5CWvS5cYalkQOLeQiijpSViDPogtKM7ZGyqK-yehhQ/edit#heading=h.5s9novsydyp1)
-- Heroku app
+- Heroku
 
 ### Mentor
 - [Can Sücüllü](https://github.com/cansucullu) were consulted during the development process.
