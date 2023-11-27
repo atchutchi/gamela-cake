@@ -10951,7 +10951,7 @@ header.masthead {
   padding-bottom: 6rem;
   text-align: center;
   color: #fff;
-  background-image: url("../assets/img/bg-header.webp");
+  background-image: url("https://res.cloudinary.com/dpb3roq0r/image/upload/v1701061459/static/assets/img/bg-header.8042e91d6e71.webp");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
@@ -11261,7 +11261,7 @@ header.masthead .masthead-heading {
 
 section#contact {
   background-color: #212529;
-  background-image: url("../assets/img/contact-form-bg.png");
+  background-image: url("https://res.cloudinary.com/dpb3roq0r/image/upload/v1701061458/static/assets/img/contact-form-bg.77f0278ffe73.png");
   background-repeat: no-repeat;
   background-position: center;
 }
