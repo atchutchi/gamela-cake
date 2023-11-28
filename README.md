@@ -171,18 +171,15 @@ As a **customer** I can ** receive reminders of my upcoming reservation,** so th
 
 ## Features
 
-### Navigation Bar - Before and After Login
-![Navigation Bar before login](./static/assets/img/readme/navbar-1.png)
-![Navigation Bar after login](./static/assets/img/readme/navbar-2.png)
-
-### Landing Page
-![Landing Page](./static/assets/img/readme/landing_page.png)
+### Landing Page - Before and After Login
+![Landing Page before login](./static/assets/img/readme/home_page.png)
+![Landing Page after login](./static/assets/img/readme/home_page2.png)
 
 ### Cake List Section
-![Cake Section](./static/assets/img/readme/cake_list_card.png)
+![Cake Section](./static/assets/img/readme/section_cake.png)
 
 ### Contact Section
-![Contact Section](./static/assets/img/readme/contact_form.png)
+![Contact Section](./static/assets/img/readme/sectio_contact.png)
 
 ### Footer
 ![Footer](./static/assets/img/readme/footer.png)
@@ -194,22 +191,22 @@ As a **customer** I can ** receive reminders of my upcoming reservation,** so th
 ![Signup page](./static/assets/img/readme/signup.png)
 
 ### Cake Page
-![Cake Page](./static/assets/img/readme/cake_list_card.png)
+![Cake Page](./static/assets/img/readme/cake_page.png)
 
 ### Reservation Page
-![Reservation page](./static/assets/img/readme/reservation.png)
+![Reservation page](./static/assets/img/readme/reservation_page.png)
 
 ### Cake Booking Page
 ![Reservation_form page](./static/assets/img/readme/reservation-form.png)
 
 ### Edit Reservation Page
-![Edit_reservation page](./static/assets/img/readme/)
+![Edit_reservation page](./static/assets/img/readme/edit_page.png)
 
 ### Delete Reservation Page
-![Delete_reservation page](./static/assets/img/readme/)
+![Delete_reservation page](./static/assets/img/readme/delete_page.png)
 
 ### User Page
-![User page](./static/assets/img/readme/user.png)
+![User page](./static/assets/img/readme/user_page.png)
 
 
 
