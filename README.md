@@ -168,6 +168,13 @@ As a **customer** I can ** receive reminders of my upcoming reservation,** so th
 - [ ] Design reminder email templates.
 - [ ] Implement a feature for users to modify or cancel reservations from the reminder email.
 
+## Skeleton 
+
+### Database Schema
+
+This section provides an overview of the database schema used in our application. The schema includes five main tables: User, Cake, Order, ContactMessage, and Reservation. Each table is designed to store specific information related to our cake reservation system.
+![dbdiagram](./static/assets/img/readme/dbdiagram.png)
+
 
 ## Features
 
