@@ -221,17 +221,93 @@ This section provides an overview of the database schema used in our application
 
 ## Future Improvements
 
-## Testing
+## Testing and Bugs Fixed
+### Error: ModuleNotFoundError at Django Admin Login Page
+**Issue:**
+Attempted to access the Django admin login page and encountered a ModuleNotFoundError.
+Error Message: No module named 'clodinary_storage'.
+Cause: Triggered when the server tried to load static files storage configuration.
+**Resolution:**
+Identified as a typographical error in settings.py.
+Original setting: STATICFILES_STORAGE = 'clodinary_storage.storage.StaticHashedCloudinaryStorage'.
+Corrected to: STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'.
+Outcome: Successful recognition of the module, enabling the Django application to locate and load the static files storage configuration.
 
-### Testing Steps
+### Error: TemplateSyntaxError on Homepage
+**Issue:**
+Encountered TemplateSyntaxError on the homepage.
+Error Details: Invalid block tag 'static' on line 48, expected 'endblock'.
+Context: Occurred during a GET request to the homepage.
+**Resolution:**
+Error caused by improper placement of {% static %} tag within a {% block %} without preceding {% load static %}.
+Solution: Ensured {% load static %} was included at the start of each template using the {% static %} tag.
+Outcome: Resolved the TemplateSyntaxError, allowing the homepage to load correctly.
 
-### Testing Bug
+### Error: NoReverseMatch in Initial Page Load
+**Issue:**
+Faced NoReverseMatch errors when loading the initial page.
+Specific Error: Absence of the URL named 'reserve' in the template.
+**Resolution:**
+- Analyzed and identified the mismatch in URL naming.
+- Updated urls.py to include a route named 'reserve' pointing to the appropriate view.
+- Adjusted template references to use the correct route names as defined in urls.py.
+Outcome: Successfully resolved the NoReverseMatch error, ensuring correct template rendering and navigation.
+
+### Warning: RuntimeWarning during Django Migrations
+**Issue:**
+Received RuntimeWarning during Django migrations.
+Warning Details: DateTimeField Reservation.datetime received a naive datetime (...) while time zone support is active.
+**Resolution:**
+- Recognized the need to use timezone-aware datetimes in Django models.
+- Implemented the use of timezone.now() function from Django to set timezone-aware default values.
+Outcome: Migrations performed without warnings, ensuring compliance with Django's timezone support.
+
+### TemplateDoesNotExist Error
+**Issue:**
+Encountered a TemplateDoesNotExist error while attempting to delete a reservation. The system reported that the template reservation_confirm_delete.html was missing.
+**Resolution:**
+- Created the missing template reservation_confirm_delete.html.
+- This allowed Django to properly render the page for confirmation of reservation deletion.
+Outcome: Successfully resolved the error, enabling the deletion process to proceed with the necessary confirmation step.
+
+### Initial NoReverseMatch Error
+**Issue:**
+After the creation of the reservation_confirm_delete.html template, a NoReverseMatch error surfaced, indicating that the URL named 'reservations' was not found.
+**Resolution:**
+- Investigated the urls.py file and identified an incorrect URL name.
+- Original URL name was 'reservation' instead of the correct 'reservations'.
+- Corrected the URL name in urls.py to 'reservations'.
+Outcome: Resolved the initial NoReverseMatch error, ensuring that the correct URL was accessible for the reservation functionality.
+
+### Recurrent NoReverseMatch Error
+Issue:
+Despite correcting the URL in urls.py, a recurrent NoReverseMatch error occurred, now indicating that the URL named 'reservation' was not found.
+**Resolution:**
+- Conducted a comprehensive review of the codebase, particularly within templates.
+- Updated all references from {% url 'reservation' %} to {% url 'reservations' %}.
+- Ensured consistency in URL naming across the entire project.
+Outcome: Effectively resolved the recurrent NoReverseMatch error, establishing uniformity in URL references and eliminating navigation issues.
+
+### ReservationDeleteView Logic Failure
+**Issue:**
+The ReservationDeleteView class, a subclass of DeleteView, was not displaying notifications or blocking reservations from deletion less than 24 hours in advance.
+**Resolution:**
+- Modified ReservationDeleteView to inherit from FormView.
+- Introduced a custom empty form class, ReservationCancelForm, to meet FormView requirements.
+- Implemented custom logic within the form_valid method to check and enforce the cancellation policy.
+Outcome:
+Successfully enabled the correct functioning of the ReservationDeleteView, with appropriate notifications and enforcement of cancellation restrictions.
+
 
 ### Remaining Bugs
 
 ### Validator Testing
 **PEP8CI**
+
 **jshint**
+
+**Accessibility**
+![accessibility](./static/assets/img/readme/lighthouse.png)
 
 ## Deployment
 
