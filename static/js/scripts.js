@@ -4,6 +4,8 @@
 * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-agency/blob/master/LICENSE)
 */
 
+/* jshint esversion: 6 */
+
 // Scripts
 
 window.addEventListener('DOMContentLoaded', event => {

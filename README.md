@@ -418,13 +418,50 @@ Outcome:
 Successfully enabled the correct functioning of the ReservationDeleteView, with appropriate notifications and enforcement of cancellation restrictions.
 
 
-### Remaining Bugs
+### Future Development
 
+In the next phase of developing the GAMELA CAKE application, I am planning to focus on implementing critical user stories that I believe will significantly enhance the overall experience for my customers. This effort is aimed at streamlining interactions and providing additional conveniences that are crucial for an engaging user experience. Here are the key user stories I am excited to work on after the current project evaluation:
 
-### Future Development 
+1. Email Confirmation for Reservations
+**What I'm Doing:**
+- I'm going to add a feature where customers get an email right after they make a reservation. This way, they'll know for sure that their booking is all set.
+
+**My Plan:**
+- Set Up Automatic Emails: I'll make it so that an email gets sent automatically as soon as someone makes a reservation.
+- What's in the Email: It'll have the date and time of the reservation, what cakes they ordered, and a reservation number.
+- Making It Happen: I need to create the email layouts and set up a system to keep track of each reservation.
+
+2. Reminder Emails for Reservations
+**What I'm Doing:**
+- I want to make sure customers don't forget about their reservations. So, - I'll set up a way to send them a reminder email a day before.
+
+**My Plan:**
+- Automatic Reminder Emails: I'll have emails go out automatically 24 hours before the reservation.
+- Details in the Reminder: The email will remind them of the date, time, and where their reservation is. Plus, I'll add a way for them to change or cancel their reservation if they need to.
+- Getting It Done: I'll design these reminder emails and add a feature so people can change their reservations right from the email.
+
+These ideas didn't make it into the project in time for the evaluation, but they're at the top of my list now. I'm really excited to add these features and make the Gamela Cake app even better. 
+
 
 
 ### Validator Testing
+**HTML Validation**
+I ran the code for all the pages through the [W3C HTML Validator](https://validator.w3.org/) using the textarea input.
+
+| Feature  | Expected Outcome | Result |
+| ------------- | ------------- | ------------- |
+| Home Page  | Page passes validation with no errors | no error  |
+| Cake Page  | Page passes validation with no errors | no error  |
+| Reservations Page  | Page passes validation with no errors | no error  |
+| User Page  | Page passes validation with no errors | no error  |
+| Login Page  | Page passes validation with no errors | no error  |
+| Sign up Page  | Page passes validation with no errors | no error  |
+| Reservation Form Page  | Page passes validation with no errors | no error  |
+| Reservation Delete Page  | Page passes validation with no errors | no error  |
+| Reservation Edit Page  | Page passes validation with no errors | no error  |
+
+
+
 **PEP8CI**
 
 **jshint**
