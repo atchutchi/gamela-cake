@@ -638,7 +638,7 @@ git push
 
 ### Media
 - Screenshot of the responsive where taken from [ui.dev](https://ui.dev/amiresponsive?url=https://gamela-cake-5a01bc199f23.herokuapp.com/reservations/).
-- [DALL·E from ChatGPT](https://chat.openai.com/) for image generated to website
+- [DALL·E from ChatGPT](https://chat.openai.com/) for image generated cake images to website
 - Adobe Photoshop to create Gamela Cake logo
 - [Balsamiq](https://balsamiq.cloud/sql8pc3/ploe11d ) to create wireframes
 
