@@ -477,8 +477,8 @@ All code passed the validation tests through the [PEP8CI](https://pep8ci.herokua
 | settings.py  | Page passes validation with no errors | All clear, no errors found  |
 
 
-**jshint**
-The code was tested on jshint Without errors.
+**JavaScript Linting**
+- The code was tested on [jshint](https://jshint.com/) Without errors.
 1. The following metrics were returned:
 - There are 18 functions in this file.
 - Function with the largest signature take 1 arguments, while the median is 1.
