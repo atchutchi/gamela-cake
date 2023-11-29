@@ -591,7 +591,17 @@ TEMPLATES = [
 ALLOWED_HOSTS = ["PROJ_NAME.herokuapp.com", "YOUR_HOSTNAME"]
 ````
 
-
+**Deploying to Heroku**
+1. Create a Procfile in your app in the root directory 
+``web: gunicorn PROJ_NAME.wsgi``
+2. Login to Heroku using the codeanywhere terminal using the command ``heroku login -i``
+3. Temporarily disable Heroku from collecting static files during deployment using the command heroku config:set DISABLE_COLLECTSTATIC=1 --app heroku-app-name
+5. Commit your changes in the terminal
+```
+git add .
+git commit -m “Deployment Commit”
+git push
+````
 
 
 
