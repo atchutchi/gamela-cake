@@ -444,8 +444,8 @@ These ideas didn't make it into the project in time for the evaluation, but they
 
 
 
-### Validator Testing
-**HTML Validation**
+## Validator Testing
+#### **HTML Validation**
 I ran the code for all the pages through the [W3C HTML Validator](https://validator.w3.org/) using the textarea input.
 
 | Feature  | Expected Outcome | Result |
@@ -460,11 +460,11 @@ I ran the code for all the pages through the [W3C HTML Validator](https://valida
 | Reservation Delete Page  | Page passes validation with no errors | no error  |
 | Reservation Edit Page  | Page passes validation with no errors | no error  |
 
-**CSS Validation**
+### **CSS Validation**
 - In my project, I conducted a CSS validation test using the Jigsaw W3 CSS Validator for CSS Level 3 + SVG. The test identified several errors, as displayed in the image below. However, I chose not to correct these errors as the CSS in question is part of a pre-made template from Start Bootstrap - Agency v7.0.12 (https://startbootstrap.com/theme/agency). For reference, the details of these validation errors can be seen in the image provided.
 ![Jigsaw](./static/assets/img/readme/w3c-css.png)
 
-**Python Linting**
+### **Python Linting**
 All code passed the validation tests through the [PEP8CI](https://pep8ci.herokuapp.com/). 
 | Feature  | Expected Outcome | Result |
 | ------------- | ------------- | ------------- |
@@ -477,7 +477,7 @@ All code passed the validation tests through the [PEP8CI](https://pep8ci.herokua
 | settings.py  | Page passes validation with no errors | All clear, no errors found  |
 
 
-**JavaScript Linting**
+### **JavaScript Linting**
 - The code was tested on [jshint](https://jshint.com/) Without errors.
 1. The following metrics were returned:
 - There are 18 functions in this file.
@@ -494,7 +494,7 @@ All code passed the validation tests through the [PEP8CI](https://pep8ci.herokua
 
 ![jshint](./static/assets/img/readme/js-hint.png)
 
-**Accessibility**
+### **Accessibility**
 ![accessibility](./static/assets/img/readme/lighthouse.png)
 
 ## Deployment
