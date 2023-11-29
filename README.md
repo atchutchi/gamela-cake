@@ -460,11 +460,40 @@ I ran the code for all the pages through the [W3C HTML Validator](https://valida
 | Reservation Delete Page  | Page passes validation with no errors | no error  |
 | Reservation Edit Page  | Page passes validation with no errors | no error  |
 
+**CSS Validation**
+- In my project, I conducted a CSS validation test using the Jigsaw W3 CSS Validator for CSS Level 3 + SVG. The test identified several errors, as displayed in the image below. However, I chose not to correct these errors as the CSS in question is part of a pre-made template from Start Bootstrap - Agency v7.0.12 (https://startbootstrap.com/theme/agency). For reference, the details of these validation errors can be seen in the image provided.
+![Jigsaw](./static/assets/img/readme/w3c-css.png)
 
+**Python Linting**
+All code passed the validation tests through the [PEP8CI](https://pep8ci.herokuapp.com/). 
+| Feature  | Expected Outcome | Result |
+| ------------- | ------------- | ------------- |
+| views.py  | Page passes validation with no errors | All clear, no errors found
+  |
+| urls.py  | Page passes validation with no errors | All clear, no errors found  |
+| models.py  | Page passes validation with no errors | All clear, no errors found  |
+| forms.py  | Page passes validation with no errors | All clear, no errors found  |
+| apps.py  | Page passes validation with no errors | All clear, no errors found  |
+| admin.py  | Page passes validation with no errors | All clear, no errors found  |
+| settings.py  | Page passes validation with no errors | no error  |
 
-**PEP8CI**
 
 **jshint**
+The code was tested on jshint Without errors.
+1. The following metrics were returned:
+- There are 18 functions in this file.
+- Function with the largest signature take 1 arguments, while the median is 1.
+- Largest function has 12 statements in it, while the median is 2.
+- The most complex function has a cyclomatic complexity value of 5 while the median is 1.
+2. One warning
+- 32	Do not use 'new' for side effects.
+2. Two undefined variables
+- 32	bootstrap
+- 67	flatpickr
+3. One unused variable
+- 96	confirmReservation
+
+![jshint](./static/assets/img/readme/js-hint.png)
 
 **Accessibility**
 ![accessibility](./static/assets/img/readme/lighthouse.png)

@@ -32,8 +32,10 @@ DEBUG = False
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-ALLOWED_HOSTS = ['8000-atchutchi-gamela-cake-4t3ldv5121.us2.codeanyapp.com',
-'localhost', 'gamela-cake-5a01bc199f23.herokuapp.com'
+ALLOWED_HOSTS = [
+    '8000-atchutchi-gamela-cake-4t3ldv5121.us2.codeanyapp.com',
+    'localhost',
+    'gamela-cake-5a01bc199f23.herokuapp.com'
 ]
 
 CSRF_TRUSTED_ORIGINS = [

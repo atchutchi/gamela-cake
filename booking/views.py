@@ -179,7 +179,9 @@ class UserReservationListView(LoginRequiredMixin, ListView):
     context_object_name = 'reservations'
 
     def get_queryset(self):
-        return Reservation.objects.filter(user=self.request.user).order_by('-datetime')
+        return Reservation.objects.filter(
+            user=self.request.user
+        ).order_by('-datetime')
 
 
 # UserView - Display user profile and reservations
@@ -194,6 +196,7 @@ class UserView(LoginRequiredMixin, TemplateView):
         context['past_reservations'] = Reservation.objects.filter(
             user=user, datetime__lt=timezone.now()).order_by('-datetime')
         return context
+
 
 # Create reservation
 class ReservationCreateView(CreateView):
@@ -223,19 +226,27 @@ class ReservationDeleteView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         reservation_id = self.kwargs.get('pk')
-        reservation = get_object_or_404(Reservation, pk=reservation_id, user=self.request.user)
+        reservation = get_object_or_404(
+            Reservation, pk=reservation_id, user=self.request.user
+        )
 
         if reservation.can_cancel():
             reservation.delete()
-            messages.success(self.request, "Reservation successfully cancelled.")
+            messages.success(
+                self.request, "Reservation successfully cancelled.")
         else:
-            messages.error(self.request, "It's not possible to cancel the reservation less than 24h in advance.")
+            messages.error(
+                self.request,
+                "Reservation cannot be cancelled within 24 hours."
+            )
 
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['reservation'] = get_object_or_404(Reservation, pk=self.kwargs.get('pk'))
+        context['reservation'] = get_object_or_404(
+            Reservation, pk=self.kwargs.get('pk')
+        )
         return context
 
 
@@ -255,7 +266,7 @@ class ReservationEditView(LoginRequiredMixin, UpdateView):
         else:
             messages.error(
                 self.request,
-                "Reservations can only be edited more than 24 hours in advance."
+                "Reservations editable only if over 24 hours in advance."
                 )
             return HttpResponseRedirect(reverse('reservations'))
 
