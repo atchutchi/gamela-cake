@@ -1,12 +1,20 @@
+# Project-Portfolio 1
 # Gamela Cake
 
 ## Overview
 Welcome to Gamela Cake, an innovative cake reservation management platform that seamlessly integrates user-friendly features with sophisticated cake selection and booking systems. Designed to provide an effortless and enjoyable cake ordering experience, our platform offers a range of functionalities tailored to both casual browsers and serious confectionery enthusiasts.
+
 [Here is the live version of the project](https://gamela-cake-5a01bc199f23.herokuapp.com/)
 
 ![Gamela Cake Resposive](./static/assets/img/readme/mockup_website.png)
 
-## User Story
+## Strategy
+
+**Project objectives**
+The project consisted of creating a reservation system website for my sister bakery called Gamela Cake, based in Guinea-Bissau, which has a variety of good cakes and can also customize them. The main purpose of the website was to allow customers to browse the confectionery products and make reservations, allow customers to send emails to obtain additional information about the online store and allow users to interact through the reviews they book.
+
+
+## User Stories
 Based on the objective of my website, I created this user story
 
 ### USER STORY: Make a Reservation
@@ -90,7 +98,7 @@ As a **guest** I can **create an account in the system,** so that **booking and 
 
 
 ### USER STORY: User Login
-As a ** registered user** I can ** log in to the system,** so that **access to personal information and reservations is secured.**
+As a **registered user** I can **log in to the system,** so that **access to personal information and reservations is secured.**
 
 #### Acceptance Criteria
 
@@ -122,7 +130,7 @@ As a **customer** I can **view a cake menu** so that **informed decisions about 
 
 
 ### USER STORY: Select Cakes
-As a **customer** I can ** add cakes from the menu to my reservation,** so that **the order meets the event's requirements.**
+As a **customer** I can **add cakes from the menu to my reservation,** so that **the order meets the event's requirements.**
 
 #### Acceptance Criteria:
 
@@ -154,7 +162,7 @@ As a **customer** I can **receive immediate email confirmation after making a re
 
 
 #### USER STORY: Reservation Reminders
-As a **customer** I can ** receive reminders of my upcoming reservation,** so that ** the event is remembered and attended.**
+As a **customer** I can **receive reminders of my upcoming reservation,** so that **the event is remembered and attended.**
 
 #### Acceptance Criteria
 
@@ -174,6 +182,121 @@ As a **customer** I can ** receive reminders of my upcoming reservation,** so th
 
 This section provides an overview of the database schema used in our application. The schema includes five main tables: User, Cake, Order, ContactMessage, and Reservation. Each table is designed to store specific information related to our cake reservation system.
 ![dbdiagram](./static/assets/img/readme/dbdiagram.png)
+
+### Models
+The Gamela Cake application utilizes a relational database model, specifically Postgres, facilitated through Elephant SQL. Below is a comprehensive breakdown of each model used in the application, explaining their roles and relationships:
+
+<details>
+
+<summary>User Model</summary>
+
+```python
+class User(models.Model):
+    # Model fields
+    username = models.CharField(max_length=150, unique=True)
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=128)
+    date_joined = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+
+    # String representation
+    def __str__(self):
+        return self.username
+```
+**Description:**
+- This model stores user authentication and profile information.
+- It contains fields for the username, email, password, and date joined, along with flags for active status and staff privileges.
+
+</details>
+<details>
+
+<summary>Cake Model</summary>
+
+```python
+class Cake(models.Model):
+    # Model fields
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    image = CloudinaryField('image', default='placeholder')
+
+    # String representation
+    def __str__(self):
+        return self.name
+```
+**Description:**
+- Represents the cakes available for reservation or purchase.
+- Includes details like name, description, price, and an image stored using Cloudinary.
+
+</details>
+<details>
+
+<summary>Order Model</summary>
+
+```python
+class Order(models.Model):
+    # Model relationships
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    cake = models.ForeignKey(Cake, on_delete=models.CASCADE)
+
+    # String representation
+    def __str__(self):
+        return f"Order {self.id} for {self.user.username}"
+```
+**Description:**
+- Captures orders made by users, linking them to specific cakes.
+- Establishes relationships with the User and Cake models.
+
+</details>
+<details>
+
+<summary>ContactMessage Model</summary>
+
+```python
+class ContactMessage(models.Model):
+    # Model fields
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    message = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+
+    # String representation
+    def __str__(self):
+        return f"Message from {self.name}"
+```
+**Description:**
+- Used for storing contact messages sent by users through the website.
+- Includes sender details and the message content.
+
+</details>
+<details>
+
+<summary>Reservation Model</summary>
+
+```python
+class Reservation(models.Model):
+    # Model relationships
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    cake = models.ForeignKey(Cake, on_delete=models.CASCADE)
+    datetime = models.DateTimeField(default=timezone.now)
+    created = models.DateTimeField(auto_now_add=True)
+    order = models.OneToOneField(Order, on_delete=models.SET_NULL, null=True, blank=True, related_name='reservation')
+
+    # String representation
+    def __str__(self):
+        return f"Reservation for {self.cake.name} by {self.user.username}"
+
+    # Custom method
+    def can_cancel(self):
+        return timezone.now() <= self.datetime - timedelta(hours=24)
+```
+Description:
+- Manages cake reservations made by users.
+- Links to User, Cake, and Order models, and includes fields for reservation time and creation time.
+- Features a custom method can_cancel to enforce a 24-hour cancellation policy.
+</details>
 
 
 ## Features
@@ -216,12 +339,8 @@ This section provides an overview of the database schema used in our application
 ![User page](./static/assets/img/readme/user_page.png)
 
 
-
-### Existing Features
-
-## Future Improvements
-
 ## Testing and Bugs Fixed
+
 ### Error: ModuleNotFoundError at Django Admin Login Page
 **Issue:**
 Attempted to access the Django admin login page and encountered a ModuleNotFoundError.
@@ -301,6 +420,10 @@ Successfully enabled the correct functioning of the ReservationDeleteView, with 
 
 ### Remaining Bugs
 
+
+### Future Development 
+
+
 ### Validator Testing
 **PEP8CI**
 
@@ -342,7 +465,6 @@ Successfully enabled the correct functioning of the ReservationDeleteView, with 
 - [Elephantsql](https://www.elephantsql.com/)
 
 ### Codes
-- Multi-line Docstrings from [Python Docstrings](https://www.geeksforgeeks.org/python-docstrings/)
 - Use the [Cloudinary](https://cloudinary.com/documentation/django_integration) documentation for is better integration in django
 - Write with a proper PEP 8 guidance [Real Python](https://realpython.com/python-pep8/#maximum-line-length-and-line-breaking)
 - Use Bootstrap [Cheatsheet](https://getbootstrap.com/docs/5.0/examples/cheatsheet/) to better style
