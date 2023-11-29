@@ -468,14 +468,13 @@ I ran the code for all the pages through the [W3C HTML Validator](https://valida
 All code passed the validation tests through the [PEP8CI](https://pep8ci.herokuapp.com/). 
 | Feature  | Expected Outcome | Result |
 | ------------- | ------------- | ------------- |
-| views.py  | Page passes validation with no errors | All clear, no errors found
-  |
+| views.py  | Page passes validation with no errors | All clear, no errors found  |
 | urls.py  | Page passes validation with no errors | All clear, no errors found  |
 | models.py  | Page passes validation with no errors | All clear, no errors found  |
 | forms.py  | Page passes validation with no errors | All clear, no errors found  |
 | apps.py  | Page passes validation with no errors | All clear, no errors found  |
 | admin.py  | Page passes validation with no errors | All clear, no errors found  |
-| settings.py  | Page passes validation with no errors | no error  |
+| settings.py  | Page passes validation with no errors | All clear, no errors found  |
 
 
 **jshint**
