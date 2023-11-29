@@ -604,20 +604,15 @@ git push
 ````
 
 
-
-
-
-
-### Deployment Bugs
-
 ## Credits
 
 ### Content
 
 ### Media
 - Screenshot of the responsive where taken from [ui.dev](https://ui.dev/amiresponsive?url=https://gamela-cake-5a01bc199f23.herokuapp.com/reservations/).
-- DALL·E for image generated
+- [DALL·E from ChatGPT](https://chat.openai.com/) for image generated to website
 - Adobe Photoshop to create Gamela Cake logo
+- [Balsamiq](https://balsamiq.cloud/sql8pc3/ploe11d ) to create wireframes
 
 ### Language Used
 - TECHNOLOGIES: 
@@ -638,11 +633,14 @@ git push
 ### DATABASES
 - [Elephantsql](https://www.elephantsql.com/)
 
-### Codes
+### Code
+- During the development of the GAMELA CAKE project, I extensively utilized the tools and resources provided by the [Code Institute](https://codeinstitute.net/global/), which played a pivotal role in guiding my development process. 
 - Use the [Cloudinary](https://cloudinary.com/documentation/django_integration) documentation for is better integration in django
-- Write with a proper PEP 8 guidance [Real Python](https://realpython.com/python-pep8/#maximum-line-length-and-line-breaking)
 - Use Bootstrap [Cheatsheet](https://getbootstrap.com/docs/5.0/examples/cheatsheet/) to better style
-- Use StartBootstrap [Agancy](https://startbootstrap.com/theme/agency) templates
+- Use StartBootstrap [Agancy](https://startbootstrap.com/theme/agency) templates with its own colors and font text.
+- I utilized Django Crispy Forms to enhance form layouts, guided by the documentation at [Django Crispy Forms Documentation](https://django-crispy-forms.readthedocs.io/en/latest/).
+- I employed the timedelta function from Python's datetime module, drawing insights and guidance from Python's [timedelta documentation](https://www.geeksforgeeks.org/python-datetime-timedelta-function/)
+- I utilized the LoginRequiredMixin from Django's django.contrib.auth.mixins, referencing the official Django documentation at [Django's Authentication System](https://docs.djangoproject.com/en/4.2/topics/auth/default/) for its implementation in my views.py.
 
 ### Deployment
 - Use Code Institute [Django Deployment Instructions](https://docs.google.com/document/d/1P5CWvS5cYalkQOLeQiijpSViDPogtKM7ZGyqK-yehhQ/edit#heading=h.5s9novsydyp1)
