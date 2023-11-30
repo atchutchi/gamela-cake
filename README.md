@@ -827,6 +827,9 @@ git push
 
 ### Content
 
+### Text
+- [ChatGPT](https://chat.openai.com/) to generate text for the gamela page and formating the readme file
+
 ### Media
 - Screenshot of the responsive where taken from [ui.dev](https://ui.dev/amiresponsive?url=https://gamela-cake-5a01bc199f23.herokuapp.com/reservations/).
 - [DALL·E from ChatGPT](https://chat.openai.com/) for image generated cake images to website
