@@ -299,47 +299,232 @@ Description:
 </details>
 
 
-## Features
+## Features and Testing
 
 ### Landing Page - Before and After Login
 ![Landing Page before login](./static/assets/img/readme/home_page.png)
 ![Landing Page after login](./static/assets/img/readme/home_page2.png)
+#### Enhanced Access Post Login
+Once users log in to the site, the home page transforms to grant full access to all the features, enhancing the user experience significantly. 
+This post-login access is crucial for engaging users and encouraging deeper interaction with the site.
+1. **Full Feature Access:**
+    - Reservations Menu: Users gain access to the reservations menu, allowing them to make new reservations, view, and manage existing ones.
+    - Cakes Menu: The cakes menu becomes available, where users can browse through the variety of cakes offered.
+    - User Profile Access: The user menu is unlocked, providing users with access to their profile, past reservations, and other personal settings.
+2. **Redirection of Landing Page Buttons:**
+    - Make Reservation Button: The welcome message’s button now redirects logged-in users directly to the reservations page, facilitating immediate action to book a cake.
+    - View Cakes Button: Similarly, the button for viewing cakes now leads directly to the cakes menu, where users can explore the different options available.
 
 ### Cake List Section
 ![Cake Section](./static/assets/img/readme/section_cake.png)
+#### Viewing Cake Selection on the Home Page
+The Cake List Section on the home page is specifically designed to showcase a selection of the most recent cakes available for sale at the store, 
+complete with pricing details. 
+This section is vital for attracting potential customers by providing a quick glimpse into the variety and quality of cakes on offer.
 
+1. **Display of Recent Cakes:**
+- The section features a selection of the latest cakes available in the store.
+- Each cake is presented with an appealing image to capture the user's attention.
+
+2. **Pricing Information:**
+- Alongside each cake, the price is prominently displayed.
+- This transparency in pricing is crucial for users to make informed decisions.
+
+3. **Integration with Home Page:**
+- The Cake List Section is seamlessly integrated into the home page layout, ensuring it is one of the first things a new visitor sees.
+- This strategic placement aims to entice users to explore more of what the store has to offer.
 ### Contact Section
 ![Contact Section](./static/assets/img/readme/sectio_contact.png)
+#### Interaction with the Contact Us Section on the Home Page
+The Contact Us Section on the home page plays a crucial role in facilitating direct communication between users and the store. 
+This section provides a user-friendly platform for visitors to inquire about additional information regarding reservations or any other queries they might have.
+
+1. **User-Friendly Contact Form:**
+- The section includes a form where users can easily send messages.
+- Fields for essential contact information such as name, email, and phone number are provided.
+
+2. **Message Input Field:**
+- Users have a dedicated space to type out their messages or queries.
+- This feature is vital for users who wish to get more details about cakes, reservations, or any other services.
+
+3. **Ease of Accessibility:**
+- The Contact Us Section is conveniently located on the home page, ensuring easy access for all users.
+- The design and placement are intended to encourage users to reach out with their questions or feedback.
 
 ### Footer
 ![Footer](./static/assets/img/readme/footer.png)
+#### Navigating the Footer Section on the Home Page
+The Footer Section of the home page is an essential component of the site, designed to provide users with important information and links in a concise and accessible manner. 
+This section is key for conveying transparency and offering additional resources to users.
+1. **Developer Information:**
+- Includes a mention of the developer or the development team, providing a sense of credibility and contact point for technical queries or feedback.
+
+2. **Copyright Notice:**
+- Displays the current year's copyright notice, which is crucial for protecting the intellectual property of the site content.
+
+3. **Social Media Links:**
+- Offers quick access to the site’s social media profiles, encouraging users to engage on different platforms and stay updated with the latest news and offers.
+
+4. **Privacy Policy and Terms of Use Links:**
+- Provides links to important legal documents such as the Privacy Policy and Terms of Use.
+- These links are essential for users to understand their rights and the site's policies.
 
 ### Login Page
 ![Login page](./static/assets/img/readme/login.png)
+#### Exploring the Usability of the Login Page
+The Login Page is a critical gateway to the personalized experiences within the GAMELA CAKE application. 
+It's designed to provide a secure and straightforward pathway for users to access their accounts, manage reservations, view cake selections, and engage with other personalized features.
+1. **User Interface:**
+- The page features a clean and intuitive interface for user login.
+- Fields for username/email and password are prominently displayed for easy access.
+
+2. **Security Features:**
+- The login process includes essential security measures to protect user accounts.
+- This may include captcha verification or other anti-bot measures to ensure safe user login.
+
+3. **Navigation to Sign Up:**
+- For new users, there’s a clear option to navigate to the sign-up page.
+- This is essential for converting first-time visitors into registered users.
 
 ### Signup Page
 ![Signup page](./static/assets/img/readme/signup.png)
+#### Evaluating the User Experience of the Sign Up Page
+The Sign Up Page is a fundamental part of the GAMELA CAKE application, serving as the entry point for new users to create accounts. 
+This page is designed to facilitate a smooth and welcoming sign-up process, enabling new users to quickly become part of the community and start enjoying the offerings.
+1. **User-Friendly Registration Form:**
+- Includes essential fields such as username, email, password, and password confirmation.
+- Designed to be intuitive and easy to navigate for a hassle-free sign-up experience.
+
+2. **Security Considerations:**
+- Incorporates security measures like password strength indicators to encourage strong password creation.
+- May include captcha or similar verification methods to prevent automated sign-ups.
+
+3. **Privacy Policy and Terms of Use:**
+- Provides links or information regarding the privacy policy and terms of use, ensuring transparency and trust.
+
+4. **Ease of Navigation to Login:**
+- Offers a clear option for users who already have an account to navigate to the login page.
 
 ### Cake Page
 ![Cake Page](./static/assets/img/readme/cake_page.png)
+#### Assessing the User Experience on the Cake Page
+The Cake Page in the GAMELA CAKE application is dedicated to showcasing all the available cakes, enabling users to explore options and make reservations. 
+This page is crucial for driving user engagement and facilitating cake reservations.
+1. **Display of Cake Selection:**
+- Features a comprehensive list of all the cakes available for reservation.
+- Each cake is presented with a clear image, name, and price, providing users with essential information at a glance.
+
+2. **Reservation Button:**
+- Beneath each cake, there’s a button prompting users if they want to reserve a specific cake.
+- This interactive element is key for initiating the reservation process.
+
+3. **Confirmation and Redirection:**
+- Upon clicking the reservation button, users are presented with a confirmation prompt.
+- Once confirmed, users are seamlessly redirected to the next page to continue with their reservation process.
 
 ### Reservation Page
 ![Reservation page](./static/assets/img/readme/reservation_page.png)
+#### Exploring the Functionality of the Reservation Page
+The Reservation Page is a vital component of the GAMELA CAKE application, serving as the hub for managing cake reservations. 
+This page not only allows users to make new reservations but also provides a comprehensive view of all their existing reservations, along with options to edit or cancel them.
+1. **Making New Reservations:**
+- The page includes a feature for users to easily make new cake reservations.
+- This typically involves selecting a cake, choosing a date and time, and confirming the reservation details.
+
+2. **Reservation Table:**
+- Displays a table listing all the user's reservations.
+- Each entry includes details such as the cake name, reservation date, and time.
+
+3. **Edit and Cancel Options:**
+- Each reservation in the table has options for editing or canceling.
+- These options provide flexibility and control to the users over their reservations.
+
+4. **User-Friendly Interface:**
+- The layout and design of the page are focused on ease of use and clarity, ensuring users can effortlessly manage their reservations.
 
 ### Cake Booking Page
 ![Reservation_form page](./static/assets/img/readme/reservation-form.png)
+#### Assessing the User Experience on the Cake Booking Page
+The Cake Booking Page is a critical section of the GAMELA CAKE application, designed specifically for users to reserve cakes. 
+This page features a booking form with various options, making the reservation process as smooth and user-friendly as possible.
+1. **Cake Selection Dropdown:**
+- A dropdown menu or a similar selection tool allows users to choose from the list of available cakes.
+- This feature is designed for ease of use, enabling users to quickly find and select their desired cake.
+
+2. **Date and Time Selection:**
+- Users can select the date and time for their cake reservation.
+- This might include a calendar interface and a time slot selection for user convenience.
+
+3. Reservation Confirmation Button:
+- A clear and prominent button is provided for users to confirm their reservation.
+- This button typically finalizes the booking process and may trigger a confirmation message or email.
 
 ### Edit Reservation Page
 ![Edit_reservation page](./static/assets/img/readme/edit_page.png)
+#### Evaluating the Edit Reservation Page for User Experience
+The Edit Reservation Page in the GAMELA CAKE application is a crucial interface for users who need to modify their existing cake reservations. 
+Similar in design to the Cake Booking Page, it incorporates additional functionalities for editing, with a key constraint on the timing of edits.
+1. **Pre-Filled Reservation Details:**
+- The form is pre-populated with the existing details of the reservation, including the selected cake, date, and time.
+- This allows users to see their current reservation settings at a glance.
+
+2. **Editable Fields for Changes:**
+- Users can edit various aspects of their reservation, such as changing the cake selection or modifying the date and time.
+- These fields are designed to be user-friendly and intuitive, similar to the original booking form.
+
+3. **24-Hour Edit Restriction:**
+- A critical feature of this page is the restriction that prevents users from editing reservations less than 24 hours before the scheduled time.
+- This rule is clearly communicated to the user to avoid confusion.
+
+4. **Update Reservation Button:**
+- A distinct button for updating the reservation is provided.
+- On submission, the system processes the changes and updates the reservation details accordingly.
 
 ### Delete Reservation Page
 ![Delete_reservation page](./static/assets/img/readme/delete_page.png)
+#### Assessing the User Experience on the Delete Reservation Page
+The Delete Reservation Page in the GAMELA CAKE application is a critical interface for users who wish to cancel their cake reservations. 
+This page is designed with a straightforward layout featuring two key options – 'Delete' and 'Cancel' – along with an important restriction regarding cancellation timing.
+
+1. **Simple and Clear Interface:**
+- The page presents a clear and concise layout, primarily focusing on the cancellation action.
+- Users are provided with straightforward options: 'Delete' to confirm the cancellation and 'Cancel' to back out of the action.
+
+2. **24-Hour Cancellation Restriction:**
+- Similar to the edit restriction, users cannot cancel a reservation if it's less than 24 hours away.
+- This policy is clearly communicated on the page to prevent any user confusion or frustration.
+
+3. **Confirmation Mechanism:**
+- Upon clicking 'Delete,' a confirmation prompt ensures that the user intends to cancel the reservation.
+- This step is crucial to prevent accidental cancellations.
+
+4. **Feedback Upon Cancellation:**
+- The system provides immediate feedback after a reservation is successfully canceled, such as a notification or redirection to an updated reservations page.
 
 ### User Page
 ![User page](./static/assets/img/readme/user_page.png)
+#### Evaluating User Experience on the User Profile Page
+The User Profile Page in the GAMELA CAKE application serves as a personal dashboard for users, offering a comprehensive view of their account details and reservation history. 
+This page is tailored to provide users with a clear overview of their upcoming and past reservations, along with essential account information.
+
+1. **User Account Information:**
+- Displays the user's username and email address prominently.
+- This section provides users with a quick reference to their account details.
+
+2. **Upcoming Reservations Section:**
+- Lists all the future reservations made by the user.
+- Each reservation entry includes details such as the cake name, reservation date, and time.
+- This section is crucial for users to keep track of their upcoming commitments.
+
+3. **Past Reservations Section:**
+
+- Showcases the user's past reservations.
+- Similar to the upcoming reservations, this section details the cake name, and the date and time of the past reservations.
+- It serves as a record for users to view their reservation history.
 
 
-## Testing and Bugs Fixed
+
+## Bugs Fixed
 
 ### Error: ModuleNotFoundError at Django Admin Login Page
 **Issue:**
