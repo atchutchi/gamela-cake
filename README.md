@@ -298,6 +298,12 @@ Description:
 - Features a custom method can_cancel to enforce a 24-hour cancellation policy.
 </details>
 
+## Surface
+### Wireframes
+My wireframing process involved laying out the key pages and components of the GAMELA CAKE application. 
+Each wireframe served as a blueprint, outlining how the content and features would be organized on the page. 
+The focus was on the user experience, ensuring that the layout was intuitive and user-friendly.
+The wireframes for the GAMELA CAKE project can be viewed here: [Balsamiq Wireframes](https://balsamiq.cloud/sql8pc3/ploe11d)
 
 ## Features and Testing
 
